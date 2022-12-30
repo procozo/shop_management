@@ -1,0 +1,59 @@
+<div id="drawflowDiv" class="drag-drawflow" #drawflowDiv></div>
+<!-- <p-button icon="pi pi-iconName" class="fixed top-0 left-0" label="export" (click)="export()"></p-button>
+<p-button icon="pi pi-iconName" class="fixed top-0 right-0" label="group" (click)="group()"></p-button> -->
+
+
+<div class="flex mb-2 justify-content-start align-items-center absolute mt-4 z-2 p-4 fixed bottom-0">
+  <button pButton pRipple type="button" (click)="this.editor.zoom_in()" icon="pi pi-plus"
+    class="p-button-rounded mt-4"></button>
+  <button pButton pRipple type="button" (click)="this.editor.zoom_out()" icon="pi pi-minus"
+    class="p-button-rounded p-button-secondary  mt-4 ml-2"></button>
+  <button pButton pRipple type="button" (click)="this.editor.zoom_reset()" icon="pi pi-refresh"
+    class="p-button-rounded p-button-secondary  mt-4 ml-2"></button>
+
+</div>
+<div
+  class="flex mb-2 flex flex-column justify-content-start align-items-center absolute mt-4 z-2 p-4 fixed top-0 right-0">
+  <button pButton pRipple type="button" (click)="export()" icon="pi pi-upload"
+    class="p-button-rounded mt-5 ml-2"></button>
+  <button pButton pRipple type="button" (click)="this.editor.clear()" icon="pi pi-refresh"
+    class="p-button-rounded mt-2 ml-2"></button>
+
+  <button pButton pRipple type="button" (click)="group()" icon="pi pi-book" class="p-button-rounded mt-2 ml-2"></button>
+</div>
+
+
+
+<!-- <div appNgDrawFlow></div> -->
+
+<p-dialog [(visible)]="showAvailablePorts">
+  <ng-template pTemplate="header">
+
+    <p>Select your action</p>
+  </ng-template>
+  <ng-template pTemplate="body">
+
+    <LDIGITAL-card class="flex flex-wrap flex-column w-12" *ngFor="let _overview of portsDataList; let i = index"
+      [cardOptions]="_overview" (selectCardEvent)="selectCardEventHandler($event)">
+    </LDIGITAL-card>
+  </ng-template>
+
+
+</p-dialog>
+
+
+
+
+<p-dialog [(visible)]="showAvailablePortsForNodes">
+  <ng-template pTemplate="header">
+    <p>Select your action</p>
+  </ng-template>
+  <ng-template pTemplate="body">
+    <LDIGITAL-card class="flex flex-wrap flex-column w-12" *ngFor="let _overview of portsDataList; let i = index"
+      [cardOptions]="_overview" (selectCardEvent)="selectCardEventHandlerForNodes($event)">
+    </LDIGITAL-card>
+
+  </ng-template>
+
+
+</p-dialog>

@@ -1,0 +1,220 @@
+<div class="w-full appHolder">
+  <div
+    class="t-0 w-full p-4 h-auto mt-2 pt-4 flex bg-white align-items-center justify-content-between h-full pr-3 z-1 border-gray-300">
+    <div class="flex justify-content-left align-items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 57.5 57.765" class="mb-0 ml-3">
+        <g id="logo" transform="translate(-0.268 -0.089)">
+          <g id="ZF_logo" transform="translate(0.268 0.089)">
+            <path id="Shape"
+              d="M.268,28.971a28.75,28.75,0,1,1,28.75,28.882A28.816,28.816,0,0,1,.268,28.971ZM8.691,44.752,20.215,16.106H6.745A25.921,25.921,0,0,0,8.691,44.752Zm40.528.161H8.816a25.618,25.618,0,0,0,40.4,0ZM30.139,12.9,18.692,41.126H51.683a25.949,25.949,0,0,0-.323-24.9h-12.6v8.893h6.961v3.8H38.757v9.952H30.9V12.9H49.117a25.617,25.617,0,0,0-40.2,0Z"
+              transform="translate(-0.268 -0.089)" fill="#1e78bf" />
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="flex w-3 flex-row justify-content-between pr-4">
+      <div *ngFor="let section of pageData.sections">
+        <p class="LDIGITAL-font-poppins-light">{{ section.title }}</p>
+      </div>
+      <!-- <p class="zf-font-prometo-bold">Home</p>
+      <p class="LDIGITAL-font-poppins-light">Contact Us</p>
+      <p class="LDIGITAL-font-poppins-light">About Us</p> -->
+    </div>
+  </div>
+
+  <div class="flex w-full p-4 h-full holder ml-3 mt-0">
+    <div class="flex flex-column w-4 fadeinleft animation-delay-100">
+      <h1 class="LDIGITAL-font-poppins-md font-normal">{{ pageData.title }}</h1>
+      <p class="font-normal text-md text-gray-400">
+        {{ pageData.description }}
+      </p>
+      <p class="font-normal text-md text-gray-800 LDIGITAL-font-poppins-md">
+        {{ pageData.description2 }}
+      </p>
+      <br />
+      <p-button label="{{ pageData.button }}" class="LDIGITAL-font-poppins-md" (click)="navigateToDashboard()">
+      </p-button>
+      <br />
+      <!-- <div class="flex flex-row mb-4 pb-4 justify-content-between w-12">
+        <div *ngFor="let overView of pageData.overview" class="flex">
+          <img src="" alt="" />
+          <p class="LDIGITAL-font-poppins-md font-bold text-3xl">
+            {{ overView.count }} <br />
+            <span class="LDIGITAL-font-poppins-md font-normal text-base">
+              {{ overView.title }}
+            </span>
+          </p>
+        </div>
+      </div> -->
+
+      <div class="flex flex-row mb-4 pb-4 justify-content-between w-12">
+        <div class="">
+          <img src="" alt="" />
+          <p class="LDIGITAL-font-poppins-md font-bold text-3xl">
+            {{ pageData.numberOfServices }} <br />
+            <span class="LDIGITAL-font-poppins-md font-normal text-lg">{{
+              pageData.servicesTitle
+              }}</span>
+          </p>
+        </div>
+
+        <div class="">
+          <img src="" alt="" />
+          <p class="LDIGITAL-font-poppins-md font-bold text-3xl">
+            {{ totalProjects }} <br />
+            <span class="LDIGITAL-font-poppins-md font-normal text-lg">{{
+              pageData.projectsTitle
+              }}</span>
+          </p>
+        </div>
+
+        <div class="">
+          <img src="" alt="" />
+          <p class="LDIGITAL-font-poppins-md font-bold text-3xl">
+            {{ pageData.numberOfMicroServices }}<br />
+            <span class="LDIGITAL-font-poppins-md font-normal text-lg">{{
+              pageData.microServicesTitle
+              }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="flex imageHolder pb-4 mb-4 fadeinright animation-delay-900 flex-column w-8">
+      <img class="image1 ml-8" src="assets/icons/1.svg" alt="" />
+      <img class="absolute image2" src="assets/icons/2.svg" alt="" />
+      <img class="absolute image3" src="assets/icons/3.svg" alt="" />
+      <img class="absolute image4" src="assets/icons/4.svg" alt="" />
+    </div>
+  </div>
+
+  <div class="flex flex-column p-4 w-full ml-3 normalbackHolder">
+    <h2 class="LDIGITAL-font-poppins-md mb-4 font-medium text-2xl">
+      {{ pageData.section_what_are_we.heading }}
+    </h2>
+    <div class="flex mt-4 w-12 pr-4">
+      <div class="w-6">
+        <img src="assets/icons/what_we_are.svg" alt="" />
+      </div>
+      <div class="flex flex-column w-5 mr-3 pr-3">
+        <p class="font-normal LDIGITAL-font-poppins-md text-xl text-gray-900">
+          {{ pageData.section_what_are_we.title }}
+        </p>
+        <p class="font-normal text-md text-gray-700 LDIGITAL-font-poppins-light">
+          {{ pageData.section_what_are_we.description }}
+        </p>
+        <br />
+        <p-button label="{{ pageData.section_what_are_we.button }}" class="LDIGITAL-font-poppins-md"></p-button>
+        <br />
+        <div class="flex fadeinleft flex-row mb-4 pb-4 justify-content-between w-12">
+          <!-- <div *ngFor="let overView of pageData.overview" class="flex">
+            <img src="" alt="" />
+            <p class="LDIGITAL-font-poppins-md font-bold text-3xl">
+              {{ overView.count }} <br />
+              <span class="LDIGITAL-font-poppins-md font-normal text-base">
+                {{ overView.title }}
+              </span>
+            </p>
+          </div> -->
+          <div class="">
+            <img src="" alt="" />
+            <p class="LDIGITAL-font-poppins-md font-bold text-3xl">
+              {{ pageData.numberOfServices }} <br />
+              <span class="LDIGITAL-font-poppins-md font-normal text-lg">{{
+                pageData.servicesTitle
+                }}</span>
+            </p>
+          </div>
+
+          <div class="">
+            <img src="" alt="" />
+            <p class="LDIGITAL-font-poppins-md font-bold text-3xl">
+              {{ totalProjects }} <br />
+              <span class="LDIGITAL-font-poppins-md font-normal text-lg">{{
+                pageData.projectsTitle
+                }}</span>
+            </p>
+          </div>
+
+          <div class="">
+            <img src="" alt="" />
+            <p class="LDIGITAL-font-poppins-md font-bold text-3xl">
+              {{ pageData.numberOfMicroServices }} <br />
+              <span class="LDIGITAL-font-poppins-md font-normal text-lg">{{
+                pageData.microServicesTitle
+                }}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-column p-4 ml-3 w-full">
+    <h2 class="LDIGITAL-font-poppins-md mb-4 font-medium text-2xl">
+      {{ pageData.services.title }}
+    </h2>
+    <div class="flex mt-4 w-12 pr-4">
+      <div class="flex w-12 justify-content-left max-w-screen overflow-x-scroll overflow-x-auto">
+        <LDIGITAL-card class="w-3" *ngFor="let _overview of pageData.services.cardsData; let i = index"
+          [cardOptions]="_overview"></LDIGITAL-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-full m-0 p-0 mt-4 flex bg-primary">
+    <div class="w-6 ml-nav-auto">
+      <div class="flex flex-column w-12 fadeinleft animation-delay-100">
+        <h1 class="LDIGITAL-font-poppins-md font-normal">
+          {{ pageData.you_are_almost_there.title }}
+        </h1>
+        <p class="font-normal text-md">
+          {{ pageData.you_are_almost_there.description }}
+        </p>
+        <p class="font-normal text-md LDIGITAL-font-poppins-md">
+          {{ pageData.you_are_almost_there.description2 }}
+        </p>
+        <br />
+        <div class="flex flex-row mb-4 pb-4 justify-content-between w-12">
+          <div class="" *ngFor="let overView of pageData.you_are_almost_there.overview">
+            <img src="" alt="" />
+            <p class="LDIGITAL-font-poppins-md font-bold text-3xl">
+              {{ overView.count }}
+              <br />
+              <span class="LDIGITAL-font-poppins-md font-normal text-lg">{{
+                overView.title
+                }}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-4 ml-nav-auto flex">
+      <div class="flex justify-content-right flex-column align-items-right w-12">
+        <div class="field mt-4 w-12">
+          <label for="username2" class="block text-xs">Name</label>
+          <input id="username2" type="username" aria-describedby="username2-help"
+            placeholder="Please enter your name here"
+            class="ng-invalid ng-dirty border-1 pl-3 w-8 border-round-3xl border-gray-300 max-w-full" pInputText />
+          <small id="username2-help" *ngIf="false" class="p-error block">Username is not available.</small>
+        </div>
+        <div class="field mt-4 w-12">
+          <label for="username2" class="block text-xs">Email</label>
+          <input id="username2" type="email" aria-describedby="username2-help"
+            class="ng-invalid ng-dirty border-1 pl-3 w-8 border-round-3xl border-gray-300 max-w-full" pInputText />
+          <small id="username2-help" *ngIf="false" class="p-error block">Username is not available.</small>
+        </div>
+        <div class="field mt-4 w-12">
+          <label for="username2" class="block text-xs">Reason</label>
+          <input id="username2" type="username" aria-describedby="username2-help"
+            class="ng-invalid ng-dirty border-1 pl-3 w-8 border-round-3xl border-gray-300 max-w-full" pInputText />
+          <small id="username2-help" *ngIf="false" class="p-error block">Username is not available.</small>
+        </div>
+
+        <div class="field mt-4 w-12">
+          <p-button icon="pi pi-send" class="white bg-white" label="{{ pageData.you_are_almost_there.buttonLabel }}">
+          </p-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

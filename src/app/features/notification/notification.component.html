@@ -1,0 +1,9 @@
+<p-sidebar [visible]="notificationConfig?.isNotification || true" position="right"
+  (onHide)="notificationConfig.isNotification = false" [baseZIndex]="10000">
+  <div class="flex flex-column">
+    <LDIGITAL-card *ngFor="
+        let _overview of notificationConfig?.notificationsList;
+        let i = index
+      " [cardOptions]="_overview"></LDIGITAL-card>
+  </div>
+</p-sidebar>

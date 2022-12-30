@@ -1,0 +1,66 @@
+<tree-root #tree [nodes]="nodes" [options]="treeOptions">
+    <ng-template #treeNodeFullTemplate let-node let-index="index" let-templates="templates">
+        <!-- {{node.data|json}} -->
+        <div>
+            <div #treeNode [style.cursor]="node?.hasChildren ? 'pointer' : 'normal'">
+
+                <span>
+
+                    <!-- <span *ngIf="node?.hasChildren">
+                        <i (click)="node.mouseAction('expanderClick', $event)">+</i>
+                    </span> -->
+                    <div [class]="node?.hasChildren ? 'justify-content-between align-items-center '+node.data.class : 'justify-content-between align-items-center '+node.data.class "
+                        (click)="node?.hasChildren ? node.mouseAction('expanderClick', $event) : null">
+
+                        <span class="flex justify-content-start align-items-center">
+                            <span *ngIf="node?.hasChildren">
+                                <i (click)="node.mouseAction('expanderClick', $event)">+</i>
+                            </span>
+                            <input type="checkbox" class="mr-2" [(ngModel)]="node.isChecked"
+                                (change)="checkboxAction(node, $event)" />
+
+                            <!-- <p-tooltip></p-tooltip> -->
+                            <span class="cursor-pointer" *ngIf="!node.data.isEditable" [pTooltip]="node.data.title"
+                                tooltipPosition="top"> {{
+                                node.data.id }} - <span class="text-md LDIGITAL-font-poppins-md"> {{node.data.alias}}
+                                </span>
+                                <!-- | {{node.data.cords}} -->
+                            </span></span>
+
+                        <textarea *ngIf="node.data.isEditable" cols="30" pInputTextarea
+                            class="text-xs LDIGITAL-font-poppins-light border-round-md border-no-focus w-12 mt-2"
+                            [(ngModel)]="node.data.title"></textarea>
+
+                        <div class="flex mb-2 flex flex-row justify-content-end pt-3 align-items-center  mt-1 z-2 p-0 "
+                            *ngIf="node.data.isEditable == true">
+                            <button (click)="node.data.isEditable = false" pButton pRipple type="button"
+                                icon="pi pi-check" class="p-button-rounded  ml-0"></button>
+
+
+                            <!-- <button pButton pRipple type="button" icon="pi pi-book"
+                                                                                                                                      class="p-button-rounded  ml-2"></button> -->
+                        </div>
+                        <p-speedDial (onClick)="setCurrentObjectModel(node.data)" class="custom-pi float-right "
+                            direction="left" [model]="items" [transitionDelay]="40" showIcon="pi pi-ellipsis-v"
+                            hideIcon="pi pi-ellipsis-v" buttonClassName="p-button-outlined">
+                        </p-speedDial>
+
+                        <div
+                            class="flex flex-row w-2 -mt-1  pt-2 justify-content-between align-items-center cursor-pointer">
+                            <span
+                                [class]="node.data.condition === 'AND' ?  'text-xs p-2 bg-green-500 text-white border-round-lg' : 'text-xs p-2 text-black border-round-lg'"
+                                (click)="node.data.condition = 'AND'">
+                                AND </span>
+                            <span
+                                [class]="node.data.condition === 'OR'  ?  'text-xs p-2 bg-red-500 text-white border-round-lg' : 'text-xs p-2 text-black border-round-lg'"
+                                (click)="node.data.condition = 'OR'">
+                                OR </span>
+                        </div>
+
+                    </div>
+                </span>
+            </div>
+            <tree-node-children [node]="node" [templates]="templates"></tree-node-children>
+        </div>
+    </ng-template>
+</tree-root>

@@ -1,0 +1,54 @@
+<div class="card w-12 p-2">
+    <!-- [paginator]="true" -->
+    <p-table #dt1 [value]="data" dataKey="id" [columns]="headersData" [(selection)]="selectedItems" [rows]="10"
+        [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-gridlines"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [globalFilterFields]="headersData">
+        <ng-template pTemplate="caption">
+            <div class="flex flex-row ">
+
+                <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                    (click)="clear(dt1)"></button>
+                <span class="p-input-icon-left ml-auto w-3 mr-0 ">
+
+                    <input class="form-control w-12 border-1 border-gray-400 border-round-lg pl-3" pInputText
+                        type="text" (input)="dt1.filterGlobal(getValue($event), 'contains')"
+                        placeholder="Search keyword" />
+                    <!-- <i class="pi pi-search"></i> -->
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+
+                <th *ngFor="let _tableD of headersData ">
+                    <div class="flex justify-content-start align-items-center">
+                        {{_tableD}}
+                        <p-columnFilter type="text" [field]="_tableD" display="menu"></p-columnFilter>
+                    </div>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+
+            <tr class="p-selectable-row">
+                <!-- {{rowData['Policy_Code']}} -->
+                <!-- {{ index | json}} -->
+                <td>
+                    <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                </td>
+                <td *ngFor="let col of columns" class="cursor-pointer" (click)="handleRowData(rowData)">
+                    {{rowData[col] ? rowData[col] : 'NA'}}
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr class="flex align-items-center text-center w-12 text-xs">
+                <td colspan="7" class="flex align-items-center text-center w-12">No Data found.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

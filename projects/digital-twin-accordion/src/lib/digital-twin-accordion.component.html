@@ -1,0 +1,31 @@
+<div class="w-full max-h-full relative pl-2 h-full mb-2 mt-2">
+  <p-accordionTab class="w-full mb-2" *ngFor="let _card of data ; let i = index" (click)="sendDataTOChild(_card)">
+    <ng-template pTemplate="header"
+      class="p-1 border-1 border-gray-300 border-round-md justify-content-between w-full align-items-center">
+      <div class="flex flex-row justify-content-between w-12 align-items-center">
+        <p class="text-xs p-1 m-2"> {{_card?.card}} </p>
+        <!-- <p-inputSwitch [(ngModel)]="switchData" class="mr-2"></p-inputSwitch> -->
+        <!-- <img src="assets/icons/menu_icon.svg" (click)="menu.toggle($event)" alt=""> -->
+      </div>
+    </ng-template>
+    <ng-template pTemplate="content">
+      <!-- <div class="flex flex-column p-3" *ngFor="let _SC of _card?.sub_cards ; let i = index">
+        {{_SC | json}}
+        <p-accordionTab class="w-full mb-2" *ngFor="let _SCS of _SC ; let i = index">
+          <ng-template pTemplate="header"
+            class="p-1 border-1 border-gray-300 border-round-md justify-content-between w-full align-items-center">
+            <div class="flex flex-row justify-content-between w-12 align-items-center">
+              <p class="text-xs p-1 m-2"> {{_SCS?.card}} </p>
+              <p-inputSwitch [(ngModel)]="switchData" class="mr-2"></p-inputSwitch>
+              <img src="assets/icons/menu_icon.svg" (click)="menu.toggle($event)" alt="">
+            </div>
+          </ng-template>
+          <ng-template pTemplate="content">
+            {{_SCS?.sub_cards | json}}
+          </ng-template>
+        </p-accordionTab>
+      </div> -->
+    </ng-template>
+  </p-accordionTab>
+</div>
+<!-- <p-menu #menu [popup]="true" [model]="items"></p-menu> -->

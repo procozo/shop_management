@@ -1,0 +1,75 @@
+<div class="flex h-full flex-row mt-nav-auto border-1 border-gray-300  p-3 pt-0">
+    <div class="w-2 pr-2">
+        <!-- <LDIGITAL-header-text [data]="{
+            title: 'All Cards from Model',
+            description: 'Below are the default templates to onboard'
+          }"></LDIGITAL-header-text> -->
+        <div
+            class="flex flex-row mb-3 relative align-items-left justify-content-center w-full pr-3 pt-0 mt-0 mr-2 ml-2">
+            <hr class="border-top-1 border-gray-300 border-dashed w-12 h-0 float-left" />
+            <span
+                class="absolute uppercase LDIGITAL-font-poppins-md font-medium text-xs bg-white p-2 pt-0 pb-0 letter-space-2">
+                All
+            </span>
+        </div>
+
+
+
+
+        <div class="flex w-12 mt-2 flex-wrap pb-2" *ngIf="allProgramCardAarray.length > 0 ">
+            <LDIGITAL-card (selectCardEvent)="selectCardEventHandler($event)" class=" w-12 w-2 mr-3"
+                *ngFor="let _overview of allProgramCardAarray; let i = index" [cardOptions]="_overview">
+            </LDIGITAL-card>
+        </div>
+
+        <div
+            class="flex flex-row mb-3 relative align-items-left justify-content-center w-full pr-3 pt-0 mt-0 mr-2 ml-2">
+            <hr class="border-top-1 border-gray-300 border-dashed w-12 h-0 float-left" />
+            <span
+                class="absolute uppercase LDIGITAL-font-poppins-md font-medium text-xs bg-white p-2 pt-0 pb-0 letter-space-2">
+                Grouped
+            </span>
+        </div>
+        <ul class="directory-list">
+            <li class="folder LDIGITAL-font-poppins-md">Group
+                <ul>
+                    <li>
+                        <ul class="text-xs">
+                            Card 2
+                        </ul>
+                    </li>
+                    <li class="folder"> <span class="text-xs p-1 m-2 bg-green-500 text-white border-round-lg"> AND
+                        </span>
+                        <ul class="text-xs">
+                            Card 3
+                        </ul>
+                    </li>
+                    <li class="folder"> <span class="text-xs p-1 m-2 bg-red-500 text-white border-round-lg"> OR </span>
+                        <ul class="text-xs">
+                            Card 4
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+        <LDIGITAL-search class="mb-4 mt-3 " *ngIf="groupedArrayCards.length > 0" [value]="searchInput"
+            (seachEventEmmiter)="searchModalsEvent($event, 0)">
+        </LDIGITAL-search>
+
+        <div class="flex w-12 mt-2 flex-wrap pb-2" *ngIf="groupedArrayCards.length > 0 ">
+            <LDIGITAL-card class=" w-12 w-2 mr-3" *ngFor="let _overview of allProgramCardAarray; let i = index"
+                [cardOptions]="_overview">
+            </LDIGITAL-card>
+        </div>
+
+
+    </div>
+    <div class="w-10 flex h-full  border-1 border-gray-300 flex-column p-3 pt-4">
+        <LDIGITAL-condition-flow class="h-full h-offset"></LDIGITAL-condition-flow>
+    </div>
+
+
+
+
+</div>

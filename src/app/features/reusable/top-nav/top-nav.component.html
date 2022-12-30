@@ -1,0 +1,17 @@
+<div class="flex flex-column z-1 relative mr-4">
+  <p class="LDIGITAL-font-poppins-md uppercase">{{ pageData.workFlowTitle }}</p>
+
+  <div class="w-2rem ml-6 mr-6 p-0 border-dashed border-top-none border-right-none border-bottom-none">
+    <div class="flex relative justify-content-center h-full max-h-full">
+      <div class="flex flex-column align-items-center">
+        <p *ngFor="let step of workflowSteps"
+          class="LDIGITAL-font-poppins-light w-8rem -ml-4 text-center text-xs p-2 border-round-3xl cursor-pointer"
+          [class]="step.title === activeStep ? 'bg-primary' : 'bg-gray-200'">
+          <span class="text-xs text-center uppercase" (click)="trackStep(step)">
+            {{ step.title }}
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

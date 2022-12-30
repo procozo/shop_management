@@ -1,0 +1,109 @@
+<div class="flex flex-column border-1 border-gray-300 border-round-lg w-12 pl-4 pr-4 pt-2"
+  [formGroup]="searchElementForm">
+  <LDIGITAL-header-text [data]="{
+      title: 'Assign Elements to project',
+      description:
+        'please select an element  in order to assign it to the projects / tasks'
+    }"></LDIGITAL-header-text>
+
+  <div
+    class="flex flex-row justify-content-start align-items-center w-full mt-0 border-1 border-gray-300 border-round-lg p-3">
+    <div class="field mr-3 w-2">
+      <label for="elementType" class="block font-medium LDIGITAL-font-poppins-light text-xs">Select Element Type</label>
+      <div class="flex w-full flex-row justify-content-start align-items-center">
+        <p-dropdown placeholder="Select a type" optionLabel="title" [options]="options?.elementOptionList || []"
+          formControlName="elementType" [showClear]="true" class="border-1 w-12 border-gray-300 border-round-3xl">
+        </p-dropdown>
+      </div>
+    </div>
+
+    <div class="field mr-3 w-2">
+      <label for="attributeType" class="block text-md font-medium LDIGITAL-font-poppins-light text-xs">Select an
+        attribute</label>
+      <div class="flex w-full flex-row justify-content-left align-items-center">
+        <p-dropdown placeholder="Select an attribute" optionLabel="title" [options]="options?.attributeList || []"
+          formControlName="attributeType" [showClear]="true" class="border-1 w-12 border-gray-300 border-round-3xl">
+        </p-dropdown>
+      </div>
+    </div>
+
+    <div class="field mr-3" *ngIf="searchElementForm?.value?.attributeType?.title">
+      <label for="value" class="block text-md font-medium LDIGITAL-font-poppins-light text-xs">Enter the {{
+        searchElementForm?.value?.attributeType?.title }}</label>
+      <div class="flex w-full flex-row justify-content-left align-items-center">
+        <span class="p-input-icon-right mr-3">
+          <input id="value" type="text" aria-describedby="value-help" formControlName="value" [placeholder]="
+              'Enter the ' + searchElementForm?.value?.attributeType?.title + ''
+            " class="ng-invalid ng-dirty border-round-3xl border-1 w-12 max-w-full border-gray-300 pl-3" pInputText />
+        </span>
+      </div>
+    </div>
+
+    <p-button label="search" icon="pi pi-search" (click)="searchElements()" iconPos="left"
+      [disabled]="searchElementForm?.valid ? false : true" class="LDIGITAL-font-poppins-md mt-1"></p-button>
+  </div>
+  <div class="flex flex-column h-full mt-0">
+    <div class="flex flex-row w-8 pr-2 justify-content-between align-items-center">
+      <LDIGITAL-header-text [data]="{
+          description:
+            'Now you can able to select a combination between models / parameters / tests'
+        }"></LDIGITAL-header-text>
+
+      <p-button *ngIf="swapType === 'no-swap'" label="Assign" icon="pi pi-plus-circle"
+        (click)="assignElements('assign')" iconPos="right" class="LDIGITAL-font-poppins-md mt-1"
+        [disabled]="enableAssign">
+      </p-button>
+    </div>
+
+    <span class="flex flex-row justify-content-end">
+      <p-button label="Delete" icon="pi pi-plus-circle" (click)="assignElements('delete')" iconPos="right"
+        class="LDIGITAL-font-poppins-md mt-1" [disabled]="enableDelete"></p-button>
+    </span>
+
+    <div class="w-full flex mb-2 h-full">
+      <div class="w-9 mr-2 pr-3 flex fadeinright" [ngClass]="swapClassOne">
+        <!--Models section starts here-->
+        <div class="flex flex-column w-4 mr-2 pr-2" *ngFor="let data of searchElementsOptions.searchElementsData">
+          <div class="flex">
+            <LDIGITAL-header-text [data]="data" class="mr-2"></LDIGITAL-header-text>
+            <p-badge *ngIf="data.searchData && data.searchData.length>0" [value]="'' + data.searchData?.length + ''"
+              size="normal" severity="bg-primary" styleClass="mr-2 font-normal"></p-badge>
+          </div>
+
+          <LDIGITAL-search class="mb-2" *ngIf="data.searchData && data.searchData.length>0"
+            (seachEventEmmiter)="searchModalsEvent($event, data)"></LDIGITAL-search>
+
+          <div *ngIf="data.searchData && data.searchData.length>0" class="flex h-20rem flex-column overflow-x-auto">
+            <LDIGITAL-card *ngFor="let _overview of data.searchData; let i = index" [cardOptions]="_overview"
+              (selectCardEvent)="selectedAssignCard($event, data)"></LDIGITAL-card>
+          </div>
+          <lib-digital-twin-placeholder class="mt-2 h-full" *ngIf="!data.searchData || data.searchData.length === 0"
+            [placeHolderConfig]="data.placeholderInfo"></lib-digital-twin-placeholder>
+        </div>
+
+      </div>
+      <div class="w-2rem m-0 p-0 border-dashed border-top-none border-right-none border-bottom-none"
+        [ngClass]="swapClassTwo">
+        <div class="flex relative justify-content-center h-full max-h-full">
+          <div class="absolute top-50" style="left:-1.15rem" *ngIf="swapType === 'no-swap'">
+            <p-button icon="pi pi-arrow-circle-left" (click)="swapElements('swap')"></p-button>
+          </div>
+          <div class="absolute flex flex-wrap gap-8" style="left:-1.15rem; top:38%" *ngIf="swapType === 'swap'">
+            <p-button icon="pi pi-plus-circle" (click)="assignElements('assign')"></p-button>
+            <p-button icon="pi pi-arrow-circle-right" (click)="swapElements('no-swap')"></p-button>
+          </div>
+        </div>
+      </div>
+      <div class="w-4 max-h-full pl-2 h-full" [ngClass]="swapClassThree">
+        <div class="flex flex-column max-h-full h-full w-12 mr-2">
+          <LDIGITAL-header-text *ngIf="swapType === 'no-swap'" [data]="{
+              title: 'Assigned Elements'
+            }"></LDIGITAL-header-text>
+
+          <zf-digital-twin-accordion [accordionOptions]="accordionOptions"
+            (selectedDeleteCard)="deleteEventOnAccordion($event)"></zf-digital-twin-accordion>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

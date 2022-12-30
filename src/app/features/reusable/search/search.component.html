@@ -1,0 +1,14 @@
+<div class="p-input-icon-right w-12">
+  <i *ngIf="!input?.value" class="fadein">
+    <img src="assets/icons/search.svg" alt=""
+  /></i>
+  <input
+    type="search"
+    #input
+    (click)="propogation($event)"
+    (keyup)="inputDebounce($event)"
+    class="w-12 pr-2 pl-2 border-round-3xl border-1 border-gray-300"
+    pInputText
+    placeholder="{{ pageData.inputPlaceholder }}"
+  />
+</div>

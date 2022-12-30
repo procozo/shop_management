@@ -1,0 +1,11 @@
+<div
+  class="p-5 h-full max-h-full border-1 border-round-lg border-dashed w-12 flex flex-column justify-content-center align-items-center bg-gray-100 border-gray-400">
+  <img [src]="placeHolderConfig?.icon" alt="" *ngIf="placeHolderConfig?.icon" />
+  <p class="LDIGITAL-font-poppins-md font-normal text-gray-700">
+    {{ placeHolderConfig?.title }}
+  </p>
+  <p class="LDIGITAL-font-poppins-light font-normal text-gray-600 p-0 m-0 text-center"
+    *ngIf="placeHolderConfig?.description">
+    {{ placeHolderConfig?.description }}
+  </p>
+</div>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <canvas id="myCanvas" width="1125" height="668" style="border: 3px solid #ccc; margin:0;padding:0;" />
+    </div>
+</body>
+<script>
+    var elem = document.getElementById('myCanvas'),
+        elemLeft = elem.offsetLeft,
+        elemTop = elem.offsetTop,
+        context = elem.getContext('2d'),
+        elements = [];
+
+    // Add event listener for `click` events.
+    elem.addEventListener('click', function (event) {
+        // var leftWidth = $("#leftPane").css("width")
+
+        //  var x = event.pageX - (elemLeft + parseInt(leftWidth) + 220),
+        //     y = event.pageY - (elemTop + 15);
+
+        var x = event.pageX - elemLeft,
+            y = event.pageY - elemTop;
+
+        elements.forEach(function (element) {
+            if (y > element.top && y < element.top + element.height && x > element.left && x < element.left + element.width) {
+                alert(element.text);
+            }
+        });
+    }, false);
+
+
+
+    // Set the value content (x,y) axis
+    var x = 15, y = 20, maxWidth = elem.getAttribute("width"),
+        maxHeight = elem.getAttribute("height"), type = 'TL',
+        width = 50, height = 60, text = "", topy = 0, leftx = 0;
+
+
+
+    for (i = 1; i <= 15; i++) {
+        y = 10;
+        for (j = 1; j <= 6; j++) {
+            width = 50, height = 60
+            switch (j) {
+                case 1:
+                    type = 'TL'; // Trailer
+                    height = 60;
+                    width = 85;
+                    text = i + 'E';
+                    break;
+                case 2:
+                    type = 'DR'; // Door
+                    height = 35;
+                    width = 85;
+                    text = i;
+                    break;
+                case 3:
+                    type = 'FL'; // Floor
+                    height = 30;
+                    width = 40;
+                    break;
+                case 4:
+                    type = 'FL'; // Floor
+                    height = 30;
+                    width = 40;
+                    y -= 10;
+                    break;
+                case 5:
+                    type = 'DR'; // Door
+                    height = 35;
+                    width = 85;
+                    text = i * 10 + 1;
+                    y = topy;
+                    break;
+                case 6:
+                    type = 'TL'; // Trailer
+                    height = 60;
+                    width = 85;
+                    text = i + 'F';
+                    y += 5;
+                    break;
+            }
+
+            topy = y;
+            leftx = x;
+            if (type == 'FL') {
+                for (k = 1; k <= 12; k++) {
+                    elements.push({
+                        colour: '#05EFFF',
+                        width: width,
+                        height: height,
+                        top: topy,
+                        left: leftx,
+                        text: k,
+                        textColour: '#fff',
+                        type: type
+                    });
+
+                    if (k % 2 == 0) {
+                        topy = y + elements[j - 1].height + 5;
+                        leftx = x;
+                        y = topy;
+                    }
+                    else {
+                        topy = y;
+                        leftx = x + elements[j - 1].width + 5;
+                    }
+                }
+                x = leftx;
+                y = topy;
+            }
+            else {
+                elements.push({
+                    colour: '#05EFFF',
+                    width: width,
+                    height: height,
+                    top: y,
+                    left: x,
+                    text: text,
+                    textColour: '#fff',
+                    type: type
+                });
+            }
+
+            //get the y axis for next content
+            y = y + elements[j - 1].height + 6
+            if (y >= maxHeight - elements[j - 1].height) {
+                break;
+            }
+        }
+        //get the x axis for next content
+        x = x + elements[0].width + 15
+        if (x >= maxWidth - elements[0].width) {
+            break;
+        }
+
+        console.log(elements)
+    }
+
+    // Render elements.
+    elements.forEach(function (element) {
+        context.font = "14pt Arial";
+        context.strokeStyle = "#000";
+        context.rect(element.left, element.top, element.width, element.height);
+        if (element.type == 'FL') {
+            context.fillText(element.text, element.left + element.width / 4, element.top + element.height / 1.5);
+        }
+        else {
+            context.fillText(element.text, element.left + element.width / 2.5, element.top + element.height / 1.5);
+        }
+        context.lineWidth = 1;
+        context.stroke()
+    });
+</script>
+
+</html>

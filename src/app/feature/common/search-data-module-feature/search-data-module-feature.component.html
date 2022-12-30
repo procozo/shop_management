@@ -1,0 +1,70 @@
+<div class="w-full flex flex-column relative border-round-lg w-12 ">
+    <p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'500ms'"
+      [hideTransitionOptions]="'500ms'"></p-toast>
+    <div class="flex flex-row mt-0 w-full h-full">
+      <div class="flex flex-column mb-3 justify-content-start w-full mt-0" [formGroup]="searchForm">
+       
+  
+
+  
+        <div
+          class="field mr-3 w-12 w-full h-auto pb-4 flex flex-row align-items-center justify-content-start relative border-1 pt-0 border-gray-300 border-round-lg w-12 pl-4 pr-4 pt-2">
+          <div class="field mr-3 w-3 mb-0 pb-2">
+            <label for="username2" class="block text-md font-medium LDIGITAL-font-poppins-light text-xs">Proc Code<span
+                class="text-red-500 text-lg"></span></label>
+            <div class="flex w-full flex-row justify-content-left align-items-center">
+              <div class="flex w-full h-full flex-row justify-content-start align-items-center p-input-icon-right">
+                <input id="Description" type="text" aria-describedby="Description-help" placeholder="Procedure Code"
+                  formControlName="proc_code"
+                  class="ng-invalid ng-dirty border-round-3xl border-1 w-12 max-w-full border-gray-300 pl-3" pInputText />
+                <img src="assets/icons/infoIcon" class="ml-2 cursor-pointer" alt="" />
+              </div>
+            </div>
+          </div>
+
+          <div class="field mr-3 w-3 mb-0 pb-2">
+            <label for="username2" class="block text-md font-medium LDIGITAL-font-poppins-light text-xs">Policy Code<span
+                class="text-red-500 text-lg"></span></label>
+            <div class="flex w-full flex-row justify-content-left align-items-center">
+              <div class="flex w-full h-full flex-row justify-content-start align-items-center p-input-icon-right">
+                <input id="Description" type="text" aria-describedby="Description-help" placeholder="Policy Code"
+                  formControlName="policy_code"
+                  class="ng-invalid ng-dirty border-round-3xl border-1 w-12 max-w-full border-gray-300 pl-3" pInputText />
+                <img src="assets/icons/infoIcon" class="ml-2 cursor-pointer" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-row justify-content-end pt-4">
+            <p-button label="Search" icon="pi pi" iconPos="left" 
+              class="LDIGITAL-font-poppins-md mt-1"></p-button>
+          </div>
+          
+          <span class="text-xs p-2 flex flex-column justify-content-center align-items-center mt-2 pt-4" >OR</span>
+          
+          
+          <div class="field mr-3 w-8 mb-0 pb-2 border-1 border-gray-300 border-round-lg p-2 pb-5 mt-3">
+            <label for="username2" class="block text-md font-medium LDIGITAL-font-poppins-light text-xs">Policy URL<span
+                class="text-red-500 text-lg"></span></label>
+            <div class="flex w-full flex-row justify-content-left align-items-center">
+              <div class="flex w-full h-full flex-row justify-content-start align-items-center p-input-icon-right">
+                <input id="Description" type="text" aria-describedby="Description-help" placeholder="Policy URL"
+                  formControlName="policy_url"
+                  class="ng-invalid ng-dirty border-round-3xl border-1 w-12 max-w-full border-gray-300 pl-3" pInputText />
+                <img src="assets/icons/infoIcon" class="ml-2 cursor-pointer" alt="" />
+              </div>
+              <div class="flex flex-row justify-content-end -mt-2">
+                <p-button label="generate" icon="pi pi" iconPos="left" 
+                  class="LDIGITAL-font-poppins-md mt-1"></p-button>
+              </div>
+              
+            </div>
+          </div>
+
+
+
+        </div>
+       
+  
+      </div>
+    </div>
+  </div>

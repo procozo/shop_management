@@ -1,0 +1,86 @@
+<!--Navigation Library | headerOptions : Header | Crated at : 27/06/2022 | Created By : Vinayak   -->
+<div
+  class="fixed left-0 mb-4 t-0 w-full h-auto p-0 flex bg-white align-items-center justify-content-between h-full pr-3 z-1 border-gray-300"
+  [class]="headerOptions?.isBorder ? 'border-bottom-1' : ''">
+  <div class="flex justify-content-left align-items-center pl-2">
+    <a routerLink="/dashboard">
+      <!-- <svg width="60" height="50" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="12.6455" y="2" width="28.2581" height="26.6452" fill="url(#paint0_linear_1_5380)" stroke="white"
+          stroke-width="4" />
+        <rect x="26.7744" y="8.87097" width="32.2581" height="30.6452" fill="url(#paint1_linear_1_5380)" />
+        <rect x="3.46777" y="21.8549" width="27.2581" height="25.6452" fill="url(#paint2_linear_1_5380)" stroke="white"
+          stroke-width="5" />
+        <defs>
+          <linearGradient id="paint0_linear_1_5380" x1="26.7745" y1="0" x2="26.7745" y2="30.6452"
+            gradientUnits="userSpaceOnUse">
+            <stop stop-color="#4910AE" />
+            <stop offset="1" stop-color="#051524" />
+          </linearGradient>
+          <linearGradient id="paint1_linear_1_5380" x1="42.9034" y1="8.87097" x2="42.9034" y2="39.5161"
+            gradientUnits="userSpaceOnUse">
+            <stop stop-color="#3379BA" />
+            <stop offset="1" stop-color="#051524" />
+          </linearGradient>
+          <linearGradient id="paint2_linear_1_5380" x1="17.0968" y1="19.3549" x2="17.0968" y2="50"
+            gradientUnits="userSpaceOnUse">
+            <stop stop-color="#0788FF" />
+            <stop offset="1" stop-color="#051524" />
+          </linearGradient>
+        </defs>
+      </svg> -->
+      <!-- <img src="assets/icons/logo.png" alt=""> -->
+
+    </a>
+
+    <div class="flex flex-column ml-2 h-5rem">
+      <p class="LDIGITAL-font-poppins-md m-0 uppercase p-3 text-lg">
+        {{headerOptions?.headerProjectName}}
+        <i>
+          <img [src]="headerOptions?.icon" class="cursor-pointer" alt="" (click)="backToCreate()" /></i>
+        <br />
+        <span
+          class="LDIGITAL-font-poppins-light text-gray-500 text-sm font-bold">{{headerOptions?.headerProjectDescription}}</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="flex" *ngIf="headerOptions?.isSearchAvailable">
+    <div *ngIf="headerOptions?.isSearchAvailable" class="mr-3 flex flex-row justify-content-right align-items-center">
+      <span class="p-input-icon-right">
+        <i> <img src="assets/icons/search.svg" alt="" /></i>
+        <input type="text" class="border-round-3xl border-1 border-gray-300" pInputText
+          placeholder="Search Program here..." />
+      </span>
+    </div>
+    <div class="flex align-items-center justify-content-center mr-4 cursor-pointer h-xs">
+      <span pBadge src="assets/icons/notification.svg" alt="" [value]="headerOptions?.notificationCount">
+        <img src="assets/icons/notification.svg" alt="" class="h-lg" (click)="[emitNotificationEvent.emit()]" />
+      </span>
+    </div>
+    <div *ngIf="headerOptions?.isProfile" class="mt-0 pr-3">
+      <img src="assets/icons/profile.svg" alt="" />
+    </div>
+  </div>
+</div>
+<div *ngIf="headerOptions?.isSideNav"
+  class="w-full m-top-nav align-items-center flex bg-white fixed h-full flex-column w-auto pr-3 z-1 border-right-1 border-gray-300">
+  <!-- <button pButton pRipple (click)="isFullView = !isFullView" type="button"
+    [icon]="isFullView? 'pi pi-arrow-circle-left' : 'pi pi-arrow-circle-right' "
+    class="mt-2 ml-2 shadow-none p-button-rounded p-button-primary"></button> -->
+
+  <ul class="list-none m-0 p-0 pl-1 pt-2 ml-1">
+    <li class="fadein border-1 border-gray-300 flex justify-content-between flex-column mb-3 p-2 border-round-lg"
+      *ngFor="let _item of model" [class]="_item?.isSelected ? 'bg-primary' : 'bg-white '">
+      <!-- {{_item?.isSelected }} -->
+      <a class="flex flex-row justify-content-left cursor-pointer" (click)="[ navigate(_item)]">
+
+        <img [src]="_item?.isSelected ?   _item?.icon : _item?.selectedIcon"
+          class="mr-1 exposure_plus_2 fadeinright animation-delay-950" alt="" [pTooltip]="_item?.label"
+          tooltipPosition="right" />
+        <span class="link_name text-md underline-none LDIGITAL-font-poppins-md fadeinleft animation-delay-950"
+          *ngIf="isFullView">{{_item?.label}}</span>
+      </a>
+
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,69 @@
+<!--
+ LDIGITAL-card
+-->
+
+<div class="flex flex-wrap justify-content-left flex-column ml-nav-auto fadein" *ngIf="applicationStepNo === 1">
+  <p-progressBar mode="indeterminate" *ngIf="isAPICall" [style]="{ height: '3px' }"
+    class="p-0 m-0 absolute top-0 left-0 z-2 w-full">
+  </p-progressBar>
+  <div class="flex justify-content-between align-items-center mr-3">
+    <p class="LDIGITAL-font-poppins-md text-xl m-0 p-0">
+      {{ pageData.welcomeBlock.title }}
+    </p>
+    <p-button icon="pi pi-plus-circle" iconPos="right" label="create new project"
+      class="border-round-3xl text-sm LDIGITAL-font-poppins-md shadow-none outline-none no-focus"
+      [routerLink]="['/project']" routerLinkActive="router-link-active"></p-button>
+  </div>
+
+  <div class="flex flex-column">
+    <p class="LDIGITAL-font-poppins-md">
+      {{ pageData.overviewBlock.title }}
+    </p>
+    <div class="flex">
+      <LDIGITAL-card *ngFor="let _overview of overviewData; let i = index" [cardOptions]="_overview">
+      </LDIGITAL-card>
+    </div>
+  </div>
+  <div class="flex flex-row align-items-left justify-content-start w-11 ml-2">
+    <hr class="border-top-1 border-gray-300 border-dashed w-12 h-0 float-left" />
+  </div>
+  <div class="flex flex-column">
+    <p class="LDIGITAL-font-poppins-md">
+      {{ pageData.recentlyCreatedProjectsBlock.title }}
+      <p-badge [value]="'2'" size="normal" severity="bg-primary" styleClass="mr-2 font-normal"></p-badge>
+    </p>
+    <div class="flex w-full white-space-nowrap max-w-screen overflow-x-auto" *ngIf="projectsArray.length > 0">
+      <LDIGITAL-card class="w-auto" *ngFor="
+          let _overview of recentProject(projectsArray || []);
+          let i = index
+        " [cardOptions]="_overview" (click)="navigateToProject(_overview)">
+      </LDIGITAL-card>
+    </div>
+    <lib-digital-twin-placeholder *ngIf="projectsArray.length < 1" class="mt-2 w-11 mr-3 h-full" [placeHolderConfig]="{
+        title: 'No Projects Found',
+        description: 'Please create the project'
+      }"></lib-digital-twin-placeholder>
+  </div>
+  <div class="flex flex-column w-12">
+    <p class="LDIGITAL-font-poppins-md justify-content-between flex pr-4">
+      <span>
+        {{ pageData.allProjectsBlock.title }}
+        <p-badge [value]="'' + projectsArray.length + ''" size="normal" severity="bg-primary"
+          styleClass="mr-2 font-normal">
+        </p-badge>
+      </span>
+      <span class="LDIGITAL-font-poppins-md underline color-primary" *ngIf="projectsArray.length > 10">
+        View All
+      </span>
+    </p>
+    <div class="flex w-full white-space-nowrap max-w-screen overflow-x-auto pb-2" *ngIf="projectsArray.length > 0">
+      <LDIGITAL-card class="w-auto" *ngFor="let _overview of projectsArray; let i = index" [cardOptions]="_overview"
+        (click)="navigateToProject(_overview)">
+      </LDIGITAL-card>
+    </div>
+    <lib-digital-twin-placeholder *ngIf="projectsArray.length < 1" class="mt-2 w-11 h-full" [placeHolderConfig]="{
+        title: 'No Projects Found',
+        description: 'Please create the project'
+      }"></lib-digital-twin-placeholder>
+  </div>
+</div>

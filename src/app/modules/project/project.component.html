@@ -1,0 +1,134 @@
+<p-progressBar *ngIf="isAPICall" mode="indeterminate" [style]="{ height: '3px' }"
+  class="p-0 m-0 fixed top-0 left-0 z-2 w-full">
+</p-progressBar>
+<p-toast position="top-right"></p-toast>
+<div class="flex h-full mt-nav-auto flex-column p-3 pt-0">
+  <LDigital-notification *ngIf="pageConfig?.isNotification" [notificationConfig]="pageConfig">
+  </LDigital-notification>
+
+
+
+  <div class="flex mt-3 ml-0 w-12 h-auto">
+    <zf-digital-twin-create-task class="w-full mr-1 h-full" (createTaskEmmiter)="createTaskEmmiterHandler($event)">
+    </zf-digital-twin-create-task>
+  </div>
+
+  <div class="flex flex-row relative align-items-left justify-content-center w-full pr-3 pt-0 mt-0 mr-2 ml-2">
+    <hr class="border-top-1 border-gray-300 border-dashed w-12 h-0 float-left" />
+    <span class="absolute uppercase LDIGITAL-font-poppins-md font-medium text-xs bg-white p-2 pt-0 pb-0 letter-space-2">
+      Program insights
+    </span>
+  </div>
+
+  <p
+    class="mb-0 p-2 bg-yellow-100 border-round-md text-xs font-bold flex flex-row justify-content-start align-items-center">
+    <span class="pi pi-info-circle"></span>
+    <span class="ml-2"> To Create a Program please enter the below steps </span>
+  </p>
+
+  <div class="flex flex-row  justify-content-center align-items-center w-12 pt-2 relative">
+    <div class="flex flex-column align-items-center justify-content-center">
+      <span class="">
+        <img [src]="pageConfig.stepNumber === 1  ? 'assets/icons/placeholder_icon.svg' : 'assets/icons/right_icon.svg'"
+          class="h-2rem" alt="">
+      </span>
+      <p class="text-align-center text-center LDIGITAL-font-poppins-md m-0 p-0">
+        Engagement
+        <br>
+        <span class="LDIGITAL-font-poppins-light text-sm text-gray-500">
+          Small discription about the same
+        </span>
+      </p>
+    </div>
+
+    <div
+      class="absolute align-items-left flex flex-row justify-content-center ml-2 mr-2 mt-0 pr-3 pt-0 w-3 top-2rem progress-bar">
+      <hr class="border-top-1 border-gray-300 border-dashed w-12 h-0 float-left" />
+    </div>
+
+    <div class="flex flex-column align-items-center justify-content-center  ml-2">
+      <span class="">
+        <img src="assets/icons/placeholder_icon.svg" class="h-2rem" alt="">
+      </span>
+      <p class="text-align-center text-center LDIGITAL-font-poppins-md m-0 p-0">
+        Condition Profile
+        <br>
+        <span class="LDIGITAL-font-poppins-light text-sm text-gray-500">
+          Small discription about the same
+        </span>
+      </p>
+    </div>
+  </div>
+
+  <LDIGITAL-header-text *ngIf="pageConfig.stepNumber === 1" [data]="{
+    title: 'Default Phsycographic profiles and messages',
+    description: 'Below are the default templates to onboard'
+  }"></LDIGITAL-header-text>
+
+  <LDIGITAL-header-text *ngIf="pageConfig.stepNumber === 2" [data]="{
+    title: 'Condition Profile',
+    description: 'Below are the default templates to onboard'
+  }"></LDIGITAL-header-text>
+
+
+  <div class="flex w-full  flex-wrap pb-2" *ngIf="defaultProfileArray.length > 0 && pageConfig.stepNumber === 1">
+    <LDIGITAL-card class="w-auto w-2 mr-3" *ngFor="let _overview of defaultProfileArray; let i = index"
+      [cardOptions]="_overview">
+    </LDIGITAL-card>
+  </div>
+  <!-- <div class="flex w-full border-1 border-round-lg border-gray-300 pb-2" *ngIf="pageConfig.stepNumber === 2">
+    <LDIGITAL-condition class="w-full"
+      [options]="conditionOptions || { conditionList: [], conditionMechanismSkeleton: [] }">
+    </LDIGITAL-condition>
+  </div> -->
+
+  <div class="flex flex-row justify-content-end">
+    <p-button label="create" icon="pi pi" iconPos="left" (click)="pageConfig.stepNumber = 2"
+      class="LDIGITAL-font-poppins-md mt-1"></p-button>
+  </div>
+  <div class="flex w-12 flex-row">
+    <div class="w-6">
+
+      <LDIGITAL-header-text [data]="{
+    title: 'All Programs',
+    description: 'Below are the default templates to onboard'
+  }"></LDIGITAL-header-text>
+
+      <div class="flex w-12 flex-wrap pb-2" *ngIf="allProgramAarray.length > 0 ">
+        <LDIGITAL-card class=" w-12 w-2 mr-3" *ngFor="let _overview of allProgramAarray; let i = index"
+          [cardOptions]="_overview">
+        </LDIGITAL-card>
+      </div>
+    </div>
+
+
+    <div class="w-1 relative flex align-items-center justify-content-center">
+      <div class=" flex border-right-1 border-right-dashed h-full p-2">
+
+
+      </div>
+      <span
+        class="absolute rotate-90  uppercase LDIGITAL-font-poppins-md font-medium text-xs bg-white letter-space-2 absolute_text">
+        Most Used
+      </span>
+    </div>
+
+    <div class="w-5">
+
+      <LDIGITAL-header-text [data]="{
+    title: 'Most Used Programs',
+    description: 'Below are the default templates to onboard'
+  }"></LDIGITAL-header-text>
+
+      <div class="flex w-12 flex-wrap pb-2" *ngIf="allProgramAarray.length > 0 ">
+        <LDIGITAL-card class=" w-12 w-2 mr-3" *ngFor="let _overview of allProgramAarray; let i = index"
+          [cardOptions]="_overview">
+        </LDIGITAL-card>
+        <!-- <div class="h-20rem"> -->
+        <!-- <LDIGITAL-chart [chartOption]="chartOption"></LDIGITAL-chart> -->
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+
+</div>

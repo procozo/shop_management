@@ -1,0 +1,171 @@
+<div class="w-12 flex flex-column mb-4">
+    <div class="w-12 p-2 flex flex-row justify-content-between" *ngIf="options.isMainTree !== false">
+        <LDIGITAL-header-text [data]=" { title: 'Condition Profiling' ,
+        description: 'Below are the default templates to onboard' }">
+        </LDIGITAL-header-text>
+
+        <div class=" w-1 m-3 flex flex-column mr-3 h-auto flex flex-row align-items-center justify-content-between relative
+                border-1 pt-0 border-gray-300 border-round-lg p-2 pr-3 absolute mt-3 mr-0 right-0">
+            <div class="flex flex-row w-12 pt-2 justify-content-between align-items-center cursor-pointer">
+                <span
+                    [class]="mainCondition === 'AND' ?  'text-xs p-2 bg-green-500 text-white border-round-lg' : 'text-xs p-2 text-black border-round-lg'"
+                    (click)="addNewCondition('AND')">
+                    AND </span>
+                <span
+                    [class]="mainCondition === 'OR'  ?  'text-xs p-2 bg-red-500 text-white border-round-lg' : 'text-xs p-2 text-black border-round-lg'"
+                    (click)="addNewCondition('OR')">
+                    OR </span>
+            </div>
+        </div>
+    </div>
+    <div class="w-auto">
+
+        <ul class="directory-list">
+
+            <li class="folder LDIGITAL-font-poppins-md">
+                Conditions Builder
+                <ul>
+
+                    <li class="folder"
+                        *ngFor="let _condition of this.options.conditionMechanismSkeleton ; let index = index">
+                        <div class="flex w-12 flex-row align-items-center justify-content-between">
+                            <!-- <span
+                            [class]="_condition?.topCondition === 'AND' ?  'text-xs p-2 bg-green-500 text-white border-round-lg' : 'text-xs p-2 bg-red-500 text-white border-round-lg'"
+                            *ngIf="_condition?.topCondition">
+                            {{_condition?.topCondition}} </span> -->
+
+                            <div *ngIf="_condition?.topCondition"
+                                class=" w-1 m-3 flex flex-column mr-3 h-auto flex flex-row align-items-center justify-content-between relative
+                                            border-1 pt-0 border-gray-300 border-round-lg p-2 pr-3 absolute mt-3 mr-0 right-0">
+                                <div
+                                    class="flex flex-row w-12 pt-2 justify-content-between align-items-center cursor-pointer">
+                                    <span (click)="_condition.topCondition = 'AND'"
+                                        [class]="_condition?.topCondition === 'AND'  ?  'text-xs p-2 bg-green-500 text-white border-round-lg' : 'text-xs p-2 text-black border-round-lg'">
+                                        AND</span>
+                                    <span (click)="_condition.topCondition = 'OR'"
+                                        [class]="_condition?.topCondition === 'OR'   ?  'text-xs p-2 bg-red-500 text-white border-round-lg' : 'text-xs p-2 text-black border-round-lg'">
+                                        OR </span>
+                                </div>
+                            </div>
+
+
+                            <div class="flex mb-2 flex flex-row justify-content-start align-items-center  mt-1 z-2 p-0 mr-4"
+                                *ngIf="index > 0">
+                                <button pButton pRipple type="button" icon="pi pi-copy" class="p-button-rounded  ml-0"
+                                    pTooltip="Copy" (click)="copyCondition(_condition)"></button>
+                                <button pButton pRipple type="button" icon="pi pi-times" (click)="deleteData(index,_condition)"
+                                    class="p-button-rounded ml-2"></button>
+                            </div>
+                        </div>
+                        <ul class="mt-2">
+                            <div
+                                class="w-full z-2 flex flex-wrap flex-row justify-content-start relative border-round-lg w-12 align-items-center justify-content-start">
+                                <div class="field mr-3 mt-4" *ngIf="_condition.conditionList">
+                                    <!-- {{_condition.conditionList | json}} -->
+                                    <label for="elementType"
+                                        class="block font-medium LDIGITAL-font-poppins-md text-xs">Select
+                                        the
+                                        condition
+                                        <!-- <img src="assets/icons/info.svg" alt="">  -->
+                                    </label>
+                                    <div class="bg-white flex w-full flex-row justify-content-start align-items-center">
+                                        <p-dropdown placeholder="Select the condition" optionLabel="title"
+                                        [(ngModel)]="_condition.selectedString" [options]="_condition.conditionList || []" [showClear]="true"
+                                            class="border-1 w-12 border-gray-300 border-round-3xl"
+                                            (onChange)="updateMainCondtnType(_condition,index);">
+                                        </p-dropdown>
+                                    </div>
+                                </div>
+                                <div class="flex relativeflex-row align-items-center justify-content-between"
+                                    *ngFor="let _innerCondition of _condition.innerConditionArray; let i = index;">
+
+                                    <div class=" mr-3 w-15rem pt-0  relative">
+                                        <button *ngIf="_innerCondition?.isDelete !== false && i > 0" pButton pRipple
+                                            type="button" icon="pi pi-times" (click)="deleteSubData(_condition,i)"
+                                            class="p-button-rounded ml-2 absolute top-0 right-0 z-3 delete-icon"></button>
+                                        <!-- <img [src]="_innerCondition.range?.[1] > 2.2 ? 'assets/icons/good.svg' : 'assets/icons/good.svg'"
+                                            *ngIf="_innerCondition?.title === 'the current condition Acuity score'"
+                                            alt=""> -->
+                                        <label for="elementType"
+                                            class="block font-medium LDIGITAL-font-poppins-md text-xs mb-2">Enter
+                                            {{_innerCondition?.title}}
+                                            <!-- <img src="assets/icons/info.svg" alt=""> -->
+                                        </label>
+                                        <div
+                                            class="w-12 bg-white flex flex-column mr-3 w-12 w-full h-auto pb-4 flex flex-row align-items-center justify-content-between relative border-1 pt-0 border-gray-300 border-round-lg w-12 p-2 pr-3">
+                                            <div class="flex flex-row w-12 justify-content-between align-items-center">
+                                                <p>
+                                                    <span class="text-xs bg-yellow-300 p-1 border-round-lg"> min
+                                                        ({{_innerCondition.range?.[0]}})</span>
+                                                </p>
+                                                <p>
+                                                    <span class="text-xs  bg-yellow-300 p-1 border-round-lg"> max
+                                                        ({{_innerCondition.range?.[1]}})</span>
+                                                </p>
+                                            </div>
+                                            <p-slider class="w-full p-3" [(ngModel)]="_innerCondition.range"
+                                                [range]="true" [max]="_innerCondition?.max || 10"
+                                                [step]="_innerCondition?.step || 0">
+                                            </p-slider>
+                                        </div>
+                                        <!-- && getConditionCount(_innerCondition, i) -->
+                                        <img src="assets/icons/add.svg" *ngIf="_innerCondition?.isCondition  " alt=""
+                                            class="absolute top-0 right-0 cursor-pointer condition-btn"
+                                            (click)="addCondition(_innerCondition, _condition, i)">
+
+                                    </div>
+
+
+
+                                    <div class=" mr-3 w-auto pt-0 ml-4 bg-white " *ngIf="_innerCondition?.condition">
+                                        <label for="elementType"
+                                            class="block font-medium LDIGITAL-font-poppins-md text-xs mb-2">Add
+                                            Condition</label>
+                                        <div
+                                            class="w-9 flex flex-column mr-3  h-auto flex flex-row align-items-center justify-content-between relative border-1 pt-0 border-gray-300 border-round-lg p-2 pr-3">
+                                            <div
+                                                class="flex flex-row w-12 pt-2 justify-content-between align-items-center cursor-pointer">
+                                                <span (click)="_innerCondition.condition = 'AND'"
+                                                    [class]="_innerCondition?.condition === 'AND' ?  'text-xs p-2 bg-green-500 text-white border-round-lg' : 'text-xs p-2 text-black border-round-lg'">
+                                                    AND </span>
+                                                <span (click)="_innerCondition.condition = 'OR'"
+                                                    [class]="_innerCondition?.condition === 'OR' ?  'text-xs p-2 bg-red-500 text-white border-round-lg' : 'text-xs p-2 text-black border-round-lg'">
+                                                    OR </span>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="_innerCondition?.isShowDataConditionList"
+                                            class="flex flex-row justify-content-start w-full mt-2 align-items-center">
+                                            <p-dropdown placeholder="Select the condition" optionLabel="title"
+                                                [(ngModel)]="_innerCondition.value"
+                                                [options]="_innerCondition.dataList || []" [showClear]="true"
+                                                (onChange)="updateConditionType(_innerCondition, $event, _condition ,index ,i)"
+                                                class="border-1 w-12 border-gray-300 border-round-3xl">
+                                            </p-dropdown>
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                </div>
+                                <div
+                                    class="absolute flex -z-1 flex-row -z-9 align-items-left justify-content-center w-12 pr-3 pt-0 mt-5 mr-2 ml-2">
+                                    <hr class="border-top-1 border-green-500 border-dashed w-12 h-0 float-left" />
+                                    <span
+                                        class="absolute uppercase LDIGITAL-font-poppins-md font-medium text-xs bg-white p-2 pt-0 pb-0 letter-space-2">
+                                        <!-- Program insights -->
+                                    </span>
+                                </div>
+
+                            </div>
+                        </ul>
+                    </li>
+
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+
+</div>

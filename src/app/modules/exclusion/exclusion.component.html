@@ -1,0 +1,66 @@
+<p-progressBar *ngIf="isAPICall" mode="indeterminate" [style]="{ height: '3px' }"
+    class="p-0 m-0 fixed top-0 left-0 z-2 w-full">
+</p-progressBar>
+<p-toast position="top-right"></p-toast>
+<div class="flex h-full mt-nav-auto flex-column p-3 pt-0">
+    <LDigital-notification *ngIf="pageConfig?.isNotification" [notificationConfig]="pageConfig">
+    </LDigital-notification>
+
+    <LDIGITAL-header-text [data]="{
+      title: 'Business Exclusion UI',
+      description: 'The clinical schema management tool'
+    }"></LDIGITAL-header-text>
+    <LDIGITAL-search-business-exclusion [formControlObject]="formControlObject"></LDIGITAL-search-business-exclusion>
+    <div class="flex flex-row relative align-items-left justify-content-center w-full pr-3 pt-0 mb-2 mt-0 mr-2 ml-2">
+        <hr class="border-top-1 border-gray-300 border-dashed w-12 h-0 float-left" />
+        <span
+            class="absolute uppercase LDIGITAL-font-poppins-md font-medium text-xs bg-white p-2 pt-0 pb-0 letter-space-2">
+            Policy Search Data
+        </span>
+    </div>
+    <p *ngIf="false"
+        class="mb-0 p-2 bg-yellow-100 border-round-md text-xs font-bold flex flex-row justify-content-between align-items-center">
+        <span class="pi pi-info-circle">
+            <span class="ml-2 -mt-2 text-xs pb-3">
+                generated card results for -
+                “https://www.anthem.com/dam/medpolicies/abcbs_va/active/guidelines/gl_pw_c107909.html”
+            </span></span>
+
+        <span> Total Cards - 13 </span>
+        <span> policy code : CG - MEG - 37 </span>
+    </p>
+    <div class="flex h-full" *ngIf="searchDataObject.length > 0">
+
+        <div class="w-8">
+            <LDIGITAL-legato-table (rowEmmiter)="rowEmmiterHandler($event)" [data]="searchDataObject">
+            </LDIGITAL-legato-table>
+        </div>
+        <div class="w-1 relative flex align-items-center justify-content-center">
+            <div class=" flex border-right-1 border-right-dashed h-full p-0">
+            </div>
+            <span
+                class="absolute rotate-90  right-2 uppercase LDIGITAL-font-poppins-md font-medium text-xs bg-white letter-space-2 absolute_text">
+                Audit trail
+            </span>
+        </div>
+        <div class="w-3">
+            <LDIGITAL-header-text [data]="{
+                  title: 'Audit Trail for - CG-MD-37',
+                  description: 'Partial'
+                }"></LDIGITAL-header-text>
+            <span class="bg-second text-xs text-white p-2 border-round-3xl">
+                Partial
+            </span>
+            <p
+                class="mb-0 p-2 bg-yellow-100 border-round-md text-xs font-bold flex flex-row justify-content-between align-items-center">
+                <span class="pi pi-info-circle">
+                    <span class="ml-2 -mt-2 text-xs pb-3">
+                        Waiting for an approver
+                    </span></span>
+            </p>
+            <LDIGITAL-legato-timline></LDIGITAL-legato-timline>
+        </div>
+
+    </div>
+
+</div>

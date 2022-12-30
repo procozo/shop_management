@@ -1,0 +1,20 @@
+<div class="">
+    <!-- <iframe src="https://www.anthem.com/dam/medpolicies/abcbs_va/active/guidelines/gl_pw_c107909.html"
+        frameborder="0"></iframe> -->
+    <canvas [id]="'policyCanvas'+imageData.id" class="border-dashed border-gray-300 cursor-pointer"></canvas>
+    <div class="flex mb-2 justify-content-start align-items-center absolute -mt-5 mr-0 z-2 p-4 fixed top-0 right-0">
+        <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded mt-4"></button>
+        <button pButton pRipple type="button" icon="pi pi-minus"
+            class="p-button-rounded p-button-secondary mt-4 ml-2"></button>
+        <!-- <button pButton pRipple type="button" icon="pi pi-refresh"
+            class="p-button-rounded p-button-secondary mt-4 ml-2"></button> -->
+        <button pButton pRipple type="button" icon="pi pi-trash"
+            class="p-button-rounded p-button-secondary mt-4 ml-2"></button>
+        <button pButton pRipple type="button" icon="pi pi-undo" (click)="undo()"
+            class="p-button-rounded p-button-secondary mt-4 ml-2 rotate-270"></button>
+        <!-- <button pButton pRipple type="button" icon="pi pi-refresh"
+            class="p-button-rounded p-button-secondary mt-4 ml-2"></button> -->
+
+    </div>
+    <!-- <canvas
+    data-src="https://www.gannett-cdn.com/-mm-/dcd88fe5876fd549823feb35af14c0ae9f0885b6/c=0-25-492-303/local/-/media/Phoenix/None/2014/10/17/635491415661570024-garfi8.PNG?width=492&height=277&fit=crop&format=pjpg&auto=webp"></canvas> -->

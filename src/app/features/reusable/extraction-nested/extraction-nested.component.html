@@ -1,0 +1,30 @@
+<li class="flex flex-row align-items-center w-12 mr-2 justify-content-start">
+    <span class="p-1 pl-0 text-left" (click)="getEntitiesEmit.emit(_cData)">{{_cData.card}} .
+    </span>
+    <textarea *ngIf="false" rows=" 5" cols="30" pInputTextarea
+        class="text-xs LDIGITAL-font-poppins-light border-round-md border-no-focus w-12 "
+        [(ngModel)]="_cData.card"></textarea>
+
+    <p-speedDial class="custom-pi float-right" direction="right" [model]="items" [transitionDelay]="40"
+        showIcon="pi pi-ellipsis-v" hideIcon="pi pi-ellipsis-v" buttonClassName="p-button-outlined">
+    </p-speedDial>
+</li>
+
+<div *ngIf="showDescisionLogic || showCodeDetails"
+    class="flex flex-row w-10 pt-2 justify-content-between align-items-center cursor-pointer mt-0 border-1 border-gray-300 border-round-lg p-2">
+
+
+    <div *ngIf="showDescisionLogic"
+        class="flex flex-row w-4 pt-2 justify-content-between align-items-center cursor-pointer mt-0 border-1 border-gray-300 border-round-lg p-2">
+        <span (click)="_cData.logic = 'AND'"
+            [class]="_cData.logic === 'AND'|| _cData.logic === 'and' ?  'text-xs p-2 bg-green-500 text-white border-round-lg' : 'text-xs p-2 text-black border-round-lg'">
+            AND </span>
+        <span *ngIf="showDescisionLogic" (click)="_cData.logic = 'OR'"
+            [class]="_cData.logic === 'OR'  || _cData.logic === 'or'?  'text-xs p-2 bg-red-500 text-white border-round-lg' : 'text-xs p-2 text-black border-round-lg'">
+            OR </span>
+    </div>
+
+    <span class="p-2 bg-green-500 border-round-3xl text-white justify-content-between m-2 mb-3 "
+        *ngIf="showCodeDetails">CPT-19933</span>
+
+</div>

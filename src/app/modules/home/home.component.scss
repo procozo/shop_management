@@ -1,0 +1,40 @@
+.appHolder {
+   background-image: url(../../../assets/icons/back.svg);
+    background-position: right top; /*Positioning*/
+   background-repeat: no-repeat; /*Prevent showing multiple background images*/
+   background-size: 60%;
+.normalbackHolder{
+    background-image: url(../../../assets/icons/back_holder.svg);
+    background-position: left top; /*Positioning*/
+   background-repeat: no-repeat; /*Prevent showing multiple background images*/
+    background-size: 41%;
+    background-position-x: -26%;
+}
+.holder{
+
+  .imageHolder{
+     position: relative;
+
+    height: 100%;
+    img{
+      height: 500px !important;
+    }
+    .image1{
+
+    right: 5%;
+    }
+    .image2{
+         margin-top: 10% !important;
+    right: 2%;
+    }
+    .image3{
+    right: -10%;
+    margin-top: 18% !important;
+    }
+    .image4{
+          margin-top: 20% !important;
+    right: -16%;
+    }
+  }
+}
+}

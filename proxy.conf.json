@@ -1,0 +1,11 @@
+{
+  "/getPulsePolicy": {
+    "target": "https://pulse.antheminc.com",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/getPulsePolicy": ""
+    }
+  }
+}

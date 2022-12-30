@@ -1,0 +1,168 @@
+<div class="card border-round-lg border-1 border-gray-300 m-1 mt-0 w-full cursor-pointer"
+  [class]="cardOptions.actionItem ? 'bg-primary' : ''">
+
+
+  <div class="card-container yellow-container overflow-hidden flex" (click)="getCarddetails(cardOptions)">
+    <div class="flex p-3" *ngIf="cardOptions.isMultiple">
+      <div class="field-checkbox shadow-none m-0 p-0">
+        <p-checkbox [disabled]="cardOptions?.isdisabled || false" (onChange)="checkboxevent($event)" inputId="binary"
+          class="shadow-none outline-none" [(ngModel)]="cardOptions.isChecked" [binary]="true"></p-checkbox>
+        <label for="binary"></label>
+      </div>
+      <span class="text-xs ml-3 mr-3 p-3 circle border-round bg-red-500 text-white" *ngIf="cardOptions.author">
+        {{ getAuthorFirstletter(cardOptions.author) }}
+      </span>
+
+    </div>
+    <div class="flex p-3" *ngIf="cardOptions.author">
+
+      <span [pTooltip]="cardOptions.author" class="text-xs ml-3 mr-3 p-3 circle border-round bg-red-500 text-white"
+        *ngIf="cardOptions.author">
+        {{ getAuthorFirstletter(cardOptions.author) }}
+      </span>
+
+    </div>
+
+    <div class="flex p-3 flex align-items-center justify-content-center" *ngIf="cardOptions.icon">
+      <img [src]="cardOptions.icon" class="cursor-pointer" [pTooltip]="cardOptions.iconTitle || ''"
+        tooltipPosition="top" alt="" /><br />
+
+    </div>
+
+    <div class="flex w-full border-gray-400 flex-column justify-content-center">
+
+      <div class="flex w-full border-left-1 justify-content-between align-items-center justify-content-left"
+        [class]="cardOptions.actionItem ? 'border-primary' : 'border-gray-100'">
+        <p class="text-left pl-3  LDIGITAL-font-poppins-md mr-4 text-overflow-ellipsis cursor-pointer"
+          (click)="infoClickEmmiterHandler(cardOptions)" [class]="
+            cardOptions.count || cardOptions.titleOpacity
+              ? 'text-gray-500'
+              : ''
+          " [class]="cardOptions.isSingleCheckUI ? 'text-xs' : ''">
+          {{ cardOptions.title }}
+          <span *ngIf="cardOptions?.isEditable" (click)="cardOptions.isEditableDescription = true"
+            class="pi pi-pencil  right-0 top-2 mt-3 mr-2 height-20px cursor-pointer">
+          </span>
+          <img src="assets/icons/info.svg" *ngIf="!cardOptions.author && cardOptions.info" pTooltip="info"
+            class="h-1rem" alt="">
+          <br *ngIf="cardOptions.description " />
+          <span class="opacity-0.3 text-xs LDIGITAL-font-poppins-light max-w-4rem "
+            [class]="cardOptions.actionItem ? 'text-gray-50' : 'text-gray-500'"
+            [class]="cardOptions.isSingleCheckUI ? 'text-xs text-gray-500' : ''"
+            *ngIf="cardOptions.isEditableDescription != true">
+            {{ cardOptions.description }}
+          </span>
+
+
+          <br *ngIf="cardOptions.count" />
+          <span *ngIf="cardOptions.count" class="text-4xl text-primary text-bold font-bold">{{
+            cardOptions.count
+            }}</span>
+
+        </p>
+
+
+        <p class="text-right pr-3 LDIGITAL-font-poppins-md" *ngIf="cardOptions.isCreatedAt">
+          Created At<br />
+          <span
+            class="color-gray-900 opacity-0.3 text-xs text-right align-items-right text-gray-500 LDIGITAL-font-poppins-light">
+            {{ cardOptions.isCreatedAt }}
+          </span>
+        </p>
+        <div *ngIf="cardOptions.author" class="mr-2">
+          <i class="pi pi-ellipsis-v" (click)="menu.toggle($event)"></i>
+          <p-menu #menu [popup]="true" [model]="cardOptions?.actions || []"></p-menu>
+        </div>
+        <img *ngIf="cardOptions.isSingleCheckUI && cardOptions.isDelete" [src]="cardOptions.deleteIcon" alt="delete"
+          class="mr-2 cursor-pointer" [pTooltip]="'In Progress'" tooltipPosition="top" (click)=deleteCard($event) />
+        <div class="flex flex-wrap align-items-center justify-content-end"
+          *ngIf="cardOptions?.range_value || cardOptions?.risk_type">
+          <span
+            class="text-sm  LDIGITAL-font-poppins-md pr-4 flex flex-row relative align-items-center justify-content-end mt-3">
+            {{cardOptions?.range_value}}
+          </span>
+          <img *ngIf="cardOptions.risk_type" [src]="'assets/icons/'+cardOptions?.risk_type+'.svg'" alt=""
+            class=" right-0 top-2 mt-3 mr-2 height-20px" [pTooltip]="cardOptions?.risk_type || ''">
+
+
+        </div>
+
+      </div>
+      <div class="flex w-12 p-2 flex-column">
+        <textarea rows=" 5" cols="30" pInputTextarea
+          class="text-xs LDIGITAL-font-poppins-light border-round-md border-no-focus w-12 "
+          [class]="cardOptions.actionItem ? 'text-gray-50' : 'text-gray-500'"
+          [class]="cardOptions.isSingleCheckUI ? 'text-xs text-gray-500' : ''"
+          *ngIf="cardOptions.isEditableDescription == true" [(ngModel)]="cardOptions.description"></textarea>
+
+        <div class="flex mb-2 flex flex-row justify-content-end pt-3 align-items-center  mt-1 z-2 p-0 "
+          *ngIf="cardOptions.isEditableDescription == true">
+          <button pButton pRipple type="button"
+            (click)="[cardOptions.isEditableDescription = false ,printModified(cardOptions)]" icon="pi pi-check"
+            class="p-button-rounded  ml-0"></button>
+          <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded ml-2"
+            (click)="[cardOptions.isEditableDescription = false]"></button>
+
+          <!-- <button pButton pRipple type="button" icon="pi pi-book"
+                                              class="p-button-rounded  ml-2"></button> -->
+        </div>
+      </div>
+
+      <div *ngIf="cardOptions.subData"
+        class="flex flex-row w-full border-top-1 border-bottom-1 border-gray-100 bg-red-600 align-items-center justify-content-between bg-yellow-500 border-round">
+        <div *ngFor="let _subData of cardOptions.subData"
+          class="flex flex-row align-items-center w-full pl-3 border-left-1 border-bottom-0 border-gray-200">
+          <img [src]="_subData.icon" alt="" />
+          <div class="flex pl-2">
+            <p class="text-left LDIGITAL-font-poppins-md pr-3">
+              {{ _subData.count }}<br />
+              <span
+                class="color-gray-900 opacity-0.3 text-xs text-right align-items-right text-gray-500 LDIGITAL-font-poppins-light">
+                {{ _subData.title }}
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="
+          cardOptions.isElement ||
+          cardOptions.isExport ||
+          cardOptions.isStatus ||
+          cardOptions.isTest ||
+          cardOptions.isDelete
+          && (!cardOptions.isSingleCheckUI)
+        "
+        class="flex w-full border-gray-200 border-left-1 justify-content-between align-items-center justify-content-left font-bold">
+        <div class="flex pt-3 pb-3 justify-content-start align-items-center justify-content-left font-bold">
+          <button *ngIf="cardOptions.isElement" pButton pRipple type="button" icon="pi pi-plus-circle"
+            label="assign elements" (click)="assignElementsClick($event)"
+            class="p-button-rounded ml-2 no-focus shadow-none h-2rem LDIGITAL-font-poppins-md text-sm"></button>
+          <div class="flex justify-content-left flex-column ml-3 mr-2" *ngIf="cardOptions.isStatus">
+            <label for="" class="LDIGITAL-font-poppins-light text-xs mb-2">Status</label>
+            <div class="flex align-items-center">
+              <img [src]="cardOptions.statusHolderIcon" alt="" class="mr-2" />
+              <p-inputSwitch class="mr-2 mb-0 mt-1" [(ngModel)]="cardOptions.statusValue"></p-inputSwitch>
+              <span class="text-sm">{{cardOptions.statusValue ? 'enabled': 'disabled'}}</span>
+            </div>
+          </div>
+
+
+
+          <span class="text-xs ml-3 mr-3" *ngIf="cardOptions.version">
+            Version : {{ cardOptions.version }}
+          </span>
+
+          <button *ngIf="cardOptions.isExport" pButton pRipple type="button" label="export" icon="pi pi-upload"
+            class="p-button-rounded ml-2 no-focus shadow-none h-2rem LDIGITAL-font-poppins-md text-sm"></button>
+          <button *ngIf="cardOptions.isTest" pButton pRipple type="button" label="Run" (click)="runTestCard()"
+            icon="pi pi-arrow-circle-right"
+            class="p-button-rounded ml-2 mr-4 no-focus shadow-none h-2rem LDIGITAL-font-poppins-md text-sm"></button>
+        </div>
+        <img *ngIf="cardOptions.isDelete" [src]="cardOptions.deleteIcon" alt="" class="mr-2 cursor-pointer"
+          [pTooltip]="'in Progress'" tooltipPosition="top" (click)=deleteCard($event) />
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+$font-path: "./fonts/" !default;
+
+@font-face {
+  font-family: Poppins-Light;
+  font-style: normal;
+  src: url("#{$font-path}ElevanceSans-Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: Poppins-Medium;
+  font-style: normal;
+  src: url("#{$font-path}ElevanceSans-Medium.otf") format("opentype");
+}
+
+// @font-face {
+//   font-family: Prometo-Regular;
+//   font-style: normal;
+//   src: url("#{$font-path}ZFPrometo_W_Md.woff") format("woff");
+// }
+
+.LDIGITAL-font-poppins-md {
+  font-family: Poppins-Medium, sans-serif;
+}
+
+.LDIGITAL-font-poppins-light {
+  font-family: Poppins-Light, sans-serif;
+}
+
+.LDIGITAL-font-poppins-light {
+  font-family: Poppins-Light, sans-serif;
+}

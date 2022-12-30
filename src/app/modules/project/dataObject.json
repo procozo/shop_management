@@ -1,0 +1,46 @@
+[
+    {
+        "type": "diabetes",
+        "conditionProfile": [
+            {
+                "type": "acuty score",
+                "value": [
+                    0.1,
+                    0.5
+                ],
+                "condition": "or"
+            },
+            {
+                "type": "model score",
+                "value": [
+                    0.1,
+                    0.5
+                ],
+                "condition": "or"
+            }
+        ],
+        "condition": "or"
+    },
+    {
+        "type": "Asthma",
+        "conditionProfile": [
+            {
+                "type": "acuty score",
+                "value": [
+                    0.1,
+                    0.5
+                ],
+                "condition": "or"
+            },
+            {
+                "type": "model score",
+                "value": [
+                    0.1,
+                    0.5
+                ],
+                "condition": "or"
+            }
+        ],
+        "condition": "or"
+    }
+]

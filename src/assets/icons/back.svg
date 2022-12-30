@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1264" height="1184" viewBox="0 0 1264 1184">
+  <defs>
+    <filter id="Path_170">
+      <feOffset dx="17" dy="14" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#939393" flood-opacity="0.161" result="color"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur"/>
+      <feComposite operator="in" in="color"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_22">
+      <feOffset dx="17" dy="14" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-color="#939393" flood-opacity="0.161" result="color-2"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-2"/>
+      <feComposite operator="in" in="color-2"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_23">
+      <feOffset dx="17" dy="14" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-3"/>
+      <feFlood flood-color="#4910AE" flood-opacity="0.059" result="color-3"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-3"/>
+      <feComposite operator="in" in="color-3"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="back" transform="translate(-696 117)">
+    <g id="Group_81" data-name="Group 81" transform="translate(-1526 -98)">
+      <g data-type="innerShadowGroup">
+        <path id="Path_170-2" data-name="Path 170" d="M576.5,0C894.892,0,1153,265.047,1153,592s-258.108,592-576.5,592S0,918.953,0,592,258.108,0,576.5,0Z" transform="translate(2333 -19)" fill="#d6f0f6" opacity="0.3"/>
+        <g transform="matrix(1, 0, 0, 1, 2222, -19)" filter="url(#Path_170)">
+          <path id="Path_170-3" data-name="Path 170" d="M576.5,0C894.892,0,1153,265.047,1153,592s-258.108,592-576.5,592S0,918.953,0,592,258.108,0,576.5,0Z" transform="translate(111)" fill="#fff" opacity="0.3"/>
+        </g>
+      </g>
+      <g data-type="innerShadowGroup">
+        <circle id="Ellipse_22-2" data-name="Ellipse 22" cx="85" cy="85" r="85" transform="translate(2222 157)" fill="#d6f0f6" opacity="0.3"/>
+        <g transform="matrix(1, 0, 0, 1, 2222, -19)" filter="url(#Ellipse_22)">
+          <circle id="Ellipse_22-3" data-name="Ellipse 22" cx="85" cy="85" r="85" transform="translate(0 176)" fill="#fff" opacity="0.3"/>
+        </g>
+      </g>
+      <g data-type="innerShadowGroup">
+        <circle id="Ellipse_23-2" data-name="Ellipse 23" cx="42" cy="42" r="42" transform="translate(2249 356)" fill="#d6f0f6"/>
+        <g transform="matrix(1, 0, 0, 1, 2222, -19)" filter="url(#Ellipse_23)">
+          <circle id="Ellipse_23-3" data-name="Ellipse 23" cx="42" cy="42" r="42" transform="translate(27 375)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+    <g id="Group_102" data-name="Group 102" transform="translate(33.724 -43.46)">
+      <path id="Path_169" data-name="Path 169" d="M224,0s-47.923,28.633-85.056,24.689S76.518-12.946,64.376-15.219C20.941-23.351,0,0,0,0" transform="translate(857.5 663.5)" fill="none" stroke="#15d490" stroke-linecap="round" stroke-width="3" stroke-dasharray="7 9"/>
+      <path id="Polygon_2" data-name="Polygon 2" d="M16,0,32,30H0Z" transform="matrix(-0.602, -0.799, 0.799, -0.602, 843.649, 695.29)" fill="#4910AE"/>
+    </g>
+    <g id="Group_150" data-name="Group 150" transform="translate(-87.391 -96.982)">
+      <path id="Path_169-2" data-name="Path 169" d="M224,0s-47.923,28.633-85.056,24.689S76.518-12.946,64.376-15.219C20.941-23.351,0,0,0,0" transform="translate(857.5 663.5)" fill="none" stroke="#15d490" stroke-linecap="round" stroke-width="3" stroke-dasharray="7 9"/>
+      <path id="Polygon_2-2" data-name="Polygon 2" d="M16,0,32,30H0Z" transform="matrix(-0.602, -0.799, 0.799, -0.602, 843.649, 695.29)" fill="#4910AE"/>
+    </g>
+    <g id="Group_104" data-name="Group 104" transform="matrix(0.799, -0.602, 0.602, 0.799, -127.16, 786.326)">
+      <path id="Path_169-3" data-name="Path 169" d="M224,0s-47.923,28.633-85.056,24.689S76.518-12.946,64.376-15.219C20.941-23.351,0,0,0,0" transform="translate(857.5 663.5)" fill="none" stroke="#15d490" stroke-linecap="round" stroke-width="3" stroke-dasharray="7 9"/>
+      <path id="Polygon_2-3" data-name="Polygon 2" d="M16,0,32,30H0Z" transform="matrix(-0.602, -0.799, 0.799, -0.602, 843.649, 695.29)" fill="#4910AE"/>
+    </g>
+    <g id="Group_105" data-name="Group 105" transform="matrix(0.799, -0.602, 0.602, 0.799, -286.018, 254.785)">
+      <path id="Path_169-4" data-name="Path 169" d="M107.271-8.827S84.321,4.885,66.539,3s-29.9-18.023-35.71-19.111C10.028-20.01,0-8.827,0-8.827" transform="translate(840.247 663.5)" fill="none" stroke="#15d490" stroke-linecap="round" stroke-width="3" stroke-dasharray="7 9"/>
+      <path id="Polygon_2-4" data-name="Polygon 2" d="M7.662,0l7.662,14.367H0Z" transform="matrix(-0.602, -0.799, 0.799, -0.602, 833.614, 669.897)" fill="#4910AE"/>
+    </g>
+  </g>
+</svg>

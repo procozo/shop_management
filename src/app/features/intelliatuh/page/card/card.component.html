@@ -1,0 +1,281 @@
+<p-progressBar *ngIf="isAPICall" mode="indeterminate" [style]="{ height: '3px' }"
+    class="p-0 m-0 fixed top-0 left-0 z-2 w-full">
+</p-progressBar>
+<p-toast position="top-right"></p-toast>
+<div class="flex h-full mt-nav-auto flex-column p-3 pt-0">
+    <LDigital-notification *ngIf="pageConfig?.isNotification" [notificationConfig]="pageConfig">
+    </LDigital-notification>
+
+    <LDIGITAL-header-text [data]="{
+      title: 'Clinical Cards',
+      description: 'The clinical schema management tool'
+    }"></LDIGITAL-header-text>
+    <LDIGITAL-search-data-module-feature *ngIf="true"></LDIGITAL-search-data-module-feature>
+    <div *ngIf="false"
+        class="flex flex-row relative align-items-left justify-content-center w-full pr-3 pt-0 mt-0 mr-2 ml-2">
+        <hr class="border-top-1 border-gray-300 border-dashed w-12 h-0 float-left" />
+        <span
+            class="absolute uppercase LDIGITAL-font-poppins-md font-medium text-xs bg-white p-2 pt-0 pb-0 letter-space-2">
+            Policy details
+        </span>
+    </div>
+    <div class="flex flex-wrap align-items-center">
+        <span class="flex text-sm flex-wrap justify-content-between align-items-center">
+            Enable Decision
+            <p-inputSwitch class="ml-2" (onChange)="showDescisionLogic = !showDescisionLogic"></p-inputSwitch>
+        </span>
+        <span class="flex text-sm flex-wrap ml-3 justify-content-between align-items-center">
+            Show Codes
+            <p-inputSwitch class="ml-2" (onChange)="showCodeDetails = !showCodeDetails"></p-inputSwitch>
+        </span>
+    </div>
+    <p
+        class="mb-0 p-2 bg-yellow-100 border-round-md text-xs font-bold flex flex-row justify-content-between align-items-center">
+        <span class="pi pi-info-circle">
+            <span class="ml-2 -mt-2 text-xs pb-3">
+                generated card results for -
+                “https://www.anthem.com/dam/medpolicies/abcbs_va/active/guidelines/gl_pw_c107909.html”
+            </span></span>
+
+        <span> Total Cards - 13 </span>
+        <span> policy code : CG - MEG - 37 </span>
+    </p>
+    <!-- <LDIGITAL-legato-table></LDIGITAL-legato-table> -->
+    <div class="flex mt-3 flex-row w-12">
+        <div class="w-7 relative">
+
+            <LDIGITAL-search class="mt-3 w-11 mb-3" [value]="cardSearchInput"
+                (seachEventEmmiter)="serachCardEvent($event, 0)">
+            </LDIGITAL-search>
+
+
+
+            <zf-digital-twin-accordion class="mt-2" [data]="cardData"
+                (sendDataEmmiter)="sendDataEmmiterhandler($event)">
+            </zf-digital-twin-accordion>
+            <div class="fadeinleft border-round-lg p-component-overlay flex justify-content-end h-5 w-12 blur absolute z-1 border-1 border-gray-300 "
+                *ngIf="isDetailedViewShow">
+                <div
+                    [class]="isDetailedViewShow ? 'flex bg-white w-10 cursor-pointer' : 'flex bg-white w-5 cursor-pointer'">
+                    <div class="flex flex-column  mb-3 w-12 p-5 mt-0">
+                        <div class="flex flex-row w-12 justify-content-between align-items-center">
+                            <LDIGITAL-header-text class="w-10" *ngIf="!currentScenarioCard.isEditable" [data]="{
+                                      title: currentScenarioCard.card,
+                                      description: 'All the cards and sub cards visuallization',
+                                      info:false
+                                    }"></LDIGITAL-header-text>
+                            <div class="w-full flex flex-column" *ngIf="currentScenarioCard.isEditable">
+                                <textarea *ngIf="currentScenarioCard.isEditable" cols="30" pInputTextarea
+                                    class="text-xs LDIGITAL-font-poppins-light border-round-md border-no-focus w-12 mt-2"
+                                    [(ngModel)]="currentScenarioCard.card"></textarea>
+
+                                <div class="flex mb-2 flex flex-row justify-content-end pt-3 align-items-center  mt-1 z-2 p-0 "
+                                    *ngIf="currentScenarioCard.isEditable == true">
+                                    <button (click)="currentScenarioCard.isEditable = false" pButton pRipple
+                                        type="button" icon="pi pi-check" class="p-button-rounded  ml-0"></button>
+                                    <button (click)="currentScenarioCard.isEditable = false" pButton pRipple
+                                        type="button" icon="pi pi-times" class="p-button-rounded ml-2"></button>
+
+                                    <!-- <button pButton pRipple type="button" icon="pi pi-book"
+                                                                                                                                      class="p-button-rounded  ml-2"></button> -->
+                                </div>
+                            </div>
+                            <p-speedDial class="custom-pi float-right " direction="left" [model]="items"
+                                (onClick)="setCurrentObjectModel(currentScenarioCard, currentScenarioCard.sub_cards)"
+                                [transitionDelay]="40" showIcon="pi pi-ellipsis-v" hideIcon="pi pi-ellipsis-v"
+                                buttonClassName="p-button-outlined">
+                            </p-speedDial>
+                        </div>
+                        <div class="w-12 flex ml-2 imgHolder">
+                            <!-- <LDIGITAL-extraction (setCurrentObjectForSpeedDial)="setCurrentObjectModel($event)"
+                                (getEntitiesEmit)="getEntities($event)" [currentScenarioCard]="currentScenarioCard"
+                                [showCodeDetails]="showCodeDetails" [showDescisionLogic]="showDescisionLogic"
+                                [items]="items">
+                            </LDIGITAL-extraction> -->
+
+                            <div class="w-12 mb-0 h-full overflow-x-hidden overflow-y-auto directory-list pl-2">
+                                <li *ngFor="let _scCard of currentScenarioCard.sub_cards" class="directory-list">
+                                    <ul *ngFor="let _c of _scCard" class="text-xs">
+                                        <div *ngIf="true"
+                                            class="flex flex-row relative align-items-left justify-content-center w-11 pr-3 pt-0 mt-0 mr-2 ml-3 -mb-1">
+                                            <hr
+                                                class="border-top-1 border-gray-300 border-dashed w-12 h-0 float-left" />
+                                            <span
+                                                class="absolute uppercase LDIGITAL-font-poppins-md font-medium text-xs bg-white p-2 pt-0 pb-0 letter-space-2">
+                                            </span>
+                                        </div>
+
+                                        <ul *ngFor="let _cData of handleCards(_c)" class="directory-list relative">
+                                            <li
+                                                class="flex flex-row align-items-center w-12 mr-2 justify-content-start">
+                                                <span class="p-1 pl-0 w-12 text-left" *ngIf="!_cData.isEditable"
+                                                    (click)="getEntities(_cData)">{{_cData.card}} .
+                                                </span>
+                                                <div class="w-full flex flex-column" *ngIf="_cData.isEditable">
+                                                    <textarea *ngIf="_cData.isEditable" cols="30" pInputTextarea
+                                                        class="text-xs LDIGITAL-font-poppins-light border-round-md border-no-focus w-12 mt-2"
+                                                        [(ngModel)]="_cData.card"></textarea>
+
+                                                    <div class="flex mb-2 flex flex-row justify-content-end pt-3 align-items-center  mt-1 z-2 p-0 "
+                                                        *ngIf="_cData.isEditable == true">
+                                                        <button (click)="_cData.isEditable = false" pButton pRipple
+                                                            type="button" icon="pi pi-check"
+                                                            class="p-button-rounded  ml-0"></button>
+                                                        <!-- <button (click)="_cData.isEditable = false" pButton pRipple
+                                                            type="button" icon="pi pi-times"
+                                                            class="p-button-rounded ml-2"></button> -->
+
+                                                        <!-- <button pButton pRipple type="button" icon="pi pi-book"
+                                                                                                  class="p-button-rounded  ml-2"></button> -->
+                                                    </div>
+                                                </div>
+                                                <p-speedDial (onClick)="setCurrentObjectModel(_cData, _c)"
+                                                    class="custom-pi float-right" direction="right" [model]="items"
+                                                    [transitionDelay]="40" showIcon="pi pi-ellipsis-v"
+                                                    hideIcon="pi pi-ellipsis-v" buttonClassName="p-button-outlined">
+                                                </p-speedDial>
+                                            </li>
+
+                                            <div *ngIf="showDescisionLogic || showCodeDetails"
+                                                class="flex flex-row w-10 pt-2 justify-content-between align-items-center cursor-pointer mt-0 border-1 border-gray-300 border-round-lg p-2">
+
+
+                                                <div *ngIf="showDescisionLogic"
+                                                    class="flex flex-row w-4 pt-2 justify-content-between align-items-center cursor-pointer mt-0 border-1 border-gray-300 border-round-lg p-2">
+                                                    <span (click)="_cData.logic = 'AND'"
+                                                        [class]="_cData.logic === 'AND'|| _cData.logic === 'and' ?  'text-xs p-2 bg-green-500 text-white border-round-lg' : 'text-xs p-2 text-black border-round-lg'">
+                                                        AND </span>
+                                                    <span *ngIf="showDescisionLogic" (click)="_cData.logic = 'OR'"
+                                                        [class]="_cData.logic === 'OR'  || _cData.logic === 'or'?  'text-xs p-2 bg-red-500 text-white border-round-lg' : 'text-xs p-2 text-black border-round-lg'">
+                                                        OR </span>
+                                                </div>
+
+                                                <span
+                                                    class="p-2 bg-green-500 border-round-3xl text-white justify-content-between m-2 mb-3 "
+                                                    *ngIf="showCodeDetails">CPT-19933</span>
+
+                                            </div>
+
+                                        </ul>
+                                        <div *ngIf="true"
+                                            class="flex flex-row relative align-items-left justify-content-center w-11 pr-3 pt-0 mt-0 mr-2 ml-3 -mb-1">
+                                            <hr
+                                                class="border-top-1 border-gray-300 border-dashed w-12 h-0 float-left" />
+                                            <span
+                                                class="absolute uppercase LDIGITAL-font-poppins-md font-medium text-xs bg-white p-2 pt-0 pb-0 letter-space-2">
+                                            </span>
+                                        </div>
+
+                                    </ul>
+                                </li>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="w-1 relative flex align-items-center justify-content-center bg-white"
+                    *ngIf="isKeyWordListShow">
+                    <div class=" flex border-right-1 border-right-dashed border-gray-300 h-full p-2">
+
+
+                    </div>
+                    <span
+                        class="absolute rotate-90 w-1  -mt-3 uppercase LDIGITAL-font-poppins-md font-medium text-xs bg-white letter-space-2 absolute_text">
+                    </span>
+                </div>
+
+
+                <div class="w-2" (click)="isDetailedViewShow = false" *ngIf="!isKeyWordListShow">
+                </div>
+                <div [class]="isDetailedViewShow ? 'flex bg-white w-5 cursor-pointer flex-column imgHolder' : 'flex bg-white w-5 cursor-pointer flex-column imgHolder'"
+                    *ngIf="isKeyWordListShow">
+                    <div class="flex flex-row relative justify-content-between align-items-center">
+                        <p-speedDial class="custom-pi float-right absolute right-0" direction="left"
+                            [model]="keyWordMenu" [transitionDelay]="40" showIcon="pi pi-ellipsis-v"
+                            hideIcon="pi pi-ellipsis-v" buttonClassName="p-button-outlined">
+                        </p-speedDial>
+                        <LDIGITAL-header-text class="mt-5" [data]="{
+                                                title:'Keywords',
+                                                description: 'Keywords / Entities',
+                                                info:false
+                                              }"></LDIGITAL-header-text>
+                        <span class="pi pi-times mr-2 absolute top-0 mr-1 mt-1 right-0"
+                            (click)="isKeyWordListShow = false"></span>
+                    </div>
+                    <div class="flex w-12  justify-content-start flex-column">
+
+                        <div class="flex w-full flex-row justify-content-left align-items-center">
+                            <div class="flex w-9  flex-row justify-content-start align-items-center p-input-icon-right">
+                                <input #keyword id="Description" type="text" aria-describedby="Description-help"
+                                    [placeholder]="'Enter the keyword here'" [(ngModel)]="keywordText"
+                                    class="ng-invalid ng-dirty border-round-3xl border-1 w-12 max-w-full border-gray-300 pl-3"
+                                    pInputText />
+                                <img src="assets/icons/infoIcon" class="ml-2 cursor-pointer" alt="" />
+                            </div>
+                            <div>
+                                <div class="flex w-12 mb-0 justify-content-end align-items-center flex-row p-2 mt-0">
+                                    <p-button label="" iconPos="left" icon="pi pi-plus" (click)="addKeyWord()"
+                                        class="LDIGITAL-font-poppins-md">
+                                    </p-button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <LDIGITAL-search class="mt-3 w-11 mb-2" [value]="searchInput"
+                            (seachEventEmmiter)="searchModalsEvent($event, 0)">
+                        </LDIGITAL-search>
+                        <div class="flex w-12 " *ngFor="let _overview of allProgramAarray">
+                            <p-speedDial class="custom-pi float-right absolute right-0" direction="left" [model]="items"
+                                [transitionDelay]="40" showIcon="pi pi-ellipsis-v" hideIcon="pi pi-ellipsis-v"
+                                buttonClassName="p-button-outlined" (onClick)="setCurrentObjectModel(_overview)">
+                            </p-speedDial>
+                            <LDIGITAL-card class=" w-11 w-2 mr-3" [cardOptions]="_overview">
+                            </LDIGITAL-card>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-5 p-0 m-2 mt-0 relative">
+            <div class="border-dashed border-gray-300 border-round-xs bg-gray-300  p-3 imgHolder">
+                <div
+                    class="flex mb-2 justify-content-start align-items-center absolute -mt-5 mr-0 z-2 p-4 fixed top-0 right-0">
+                    <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded mt-4"></button>
+                    <button pButton pRipple type="button" icon="pi pi-minus"
+                        class="p-button-rounded p-button-secondary mt-4 ml-2"></button>
+                    <button pButton pRipple type="button" icon="pi pi-refresh"
+                        class="p-button-rounded p-button-secondary mt-4 ml-2"></button>
+                </div>
+                <div class="w-12 relative" *ngFor="let _im of imagesArray; let i = index">
+                    <!-- <div class="overlay-canvas" (click)="eventEmiterCanvasHandler([125, 813, 1042, 858])">
+                        <span class="text-xs bg-green-500 absolute opacity-10 cursor-pointer" [style]="{
+                    left: '10.38%',
+                    top: '54.13%',
+                    width:'85.6%',
+                    height: '5%'
+                  }">
+
+                        </span>
+                    </div> -->
+                    <LDIGITAL-canvas (eventEmiterCanvas)="eventEmiterCanvasHandler($event)"
+                        [imageData]="{data : _im , type : 'base', id : i }"
+                        [selectedCoordinates]="[125, 813, 1042, 858]">
+                    </LDIGITAL-canvas>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="w-12 relative" *ngFor="let _im of imagesArray; let i = index">
+
+    <LDIGITAL-canvas (eventEmiterCanvas)="eventEmiterCanvasHandler($event)"
+        [imageData]="{data : _im , type : 'base', id : i }" [selectedCoordinates]="[125, 813, 1042, 858]">
+    </LDIGITAL-canvas>
+</div> -->

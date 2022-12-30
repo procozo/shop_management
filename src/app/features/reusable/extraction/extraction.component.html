@@ -1,0 +1,56 @@
+<div class="w-12 mb-0 h-full overflow-x-hidden overflow-y-auto directory-list pl-2">
+    <li *ngFor="let _scCard of currentScenarioCard.sub_cards" class="directory-list">
+        <ul *ngFor="let _c of _scCard" class="text-xs">
+            <div *ngIf="true"
+                class="flex flex-row relative align-items-left justify-content-center w-11 pr-3 pt-0 mt-0 mr-2 ml-3 -mb-1">
+                <hr class="border-top-1 border-gray-300 border-dashed w-12 h-0 float-left" />
+                <span
+                    class="absolute uppercase LDIGITAL-font-poppins-md font-medium text-xs bg-white p-2 pt-0 pb-0 letter-space-2">
+                </span>
+            </div>
+
+            <ul *ngFor="let _cData of handleCards(_c)" class="directory-list relative">
+                <li class="flex flex-row align-items-center w-12 mr-2 justify-content-start">
+                    <span class="p-1 pl-0 text-left" (click)="getEntitiesEmit.emit(_cData)">{{_cData.card}} .
+                    </span>
+                    <textarea *ngIf="false" rows=" 5" cols="30" pInputTextarea
+                        class="text-xs LDIGITAL-font-poppins-light border-round-md border-no-focus w-12 "
+                        [(ngModel)]="_cData.card"></textarea>
+
+                    <p-speedDial (onClick)="setCurrentObjectForSpeedDial.emit(_cData)" class="custom-pi float-right"
+                        direction="right" [model]="items" [transitionDelay]="40" showIcon="pi pi-ellipsis-v"
+                        hideIcon="pi pi-ellipsis-v" buttonClassName="p-button-outlined">
+                    </p-speedDial>
+                </li>
+
+                <div *ngIf="showDescisionLogic || showCodeDetails"
+                    class="flex flex-row w-10 pt-2 justify-content-between align-items-center cursor-pointer mt-0 border-1 border-gray-300 border-round-lg p-2">
+
+
+                    <div *ngIf="showDescisionLogic"
+                        class="flex flex-row w-4 pt-2 justify-content-between align-items-center cursor-pointer mt-0 border-1 border-gray-300 border-round-lg p-2">
+                        <span (click)="_cData.logic = 'AND'"
+                            [class]="_cData.logic === 'AND'|| _cData.logic === 'and' ?  'text-xs p-2 bg-green-500 text-white border-round-lg' : 'text-xs p-2 text-black border-round-lg'">
+                            AND </span>
+                        <span *ngIf="showDescisionLogic" (click)="_cData.logic = 'OR'"
+                            [class]="_cData.logic === 'OR'  || _cData.logic === 'or'?  'text-xs p-2 bg-red-500 text-white border-round-lg' : 'text-xs p-2 text-black border-round-lg'">
+                            OR </span>
+                    </div>
+
+                    <span class="p-2 bg-green-500 border-round-3xl text-white justify-content-between m-2 mb-3 "
+                        *ngIf="showCodeDetails">CPT-19933</span>
+
+                </div>
+
+            </ul>
+            <div *ngIf="true"
+                class="flex flex-row relative align-items-left justify-content-center w-11 pr-3 pt-0 mt-0 mr-2 ml-3 -mb-1">
+                <hr class="border-top-1 border-gray-300 border-dashed w-12 h-0 float-left" />
+                <span
+                    class="absolute uppercase LDIGITAL-font-poppins-md font-medium text-xs bg-white p-2 pt-0 pb-0 letter-space-2">
+                </span>
+            </div>
+
+        </ul>
+    </li>
+</div>

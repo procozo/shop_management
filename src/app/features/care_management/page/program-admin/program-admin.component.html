@@ -1,0 +1,76 @@
+<p-progressBar *ngIf="isAPICall" mode="indeterminate" [style]="{ height: '3px' }"
+    class="p-0 m-0 fixed top-0 left-0 z-2 w-full">
+</p-progressBar>
+<p-toast position="top-right"></p-toast>
+<p-messages></p-messages>
+<div class="flex h-full mt-nav-auto flex-column p-3 pt-0">
+    <LDigital-notification *ngIf="pageConfig?.isNotification" [notificationConfig]="pageConfig">
+    </LDigital-notification>
+    <div class="flex mt-3 ml-0 w-12 h-auto">
+        <LDIGITAL-header-text [data]="{
+          title: 'Shop Management',
+          description: 'Create / view a program',
+          info:false
+        }"></LDIGITAL-header-text>
+    </div>
+
+    <div class="flex w-12 mb-0 justify-content-between align-items-center flex-row p-2">
+        <div class="w-10 mb-0">
+            <LDIGITAL-form [formControlObject]="formControlObject" (triggerFormData)="getFormData($event)" class="w-12">
+            </LDIGITAL-form>
+        </div>
+        <div class="flex w-2 mb-0 justify-content-end align-items-center flex-row p-2 -mt-3">
+            <p-button (click)="createNewProgram()" label="Create New" icon="pi pi-plus" iconPos="left"
+                class="LDIGITAL-font-poppins-md">
+            </p-button>
+        </div>
+    </div>
+    <!-- <p
+        class="mb-2 p-2 bg-yellow-100 border-round-md text-xs font-bold flex flex-row justify-content-start align-items-center -mt-3">
+        <span class="pi pi-info-circle"></span>
+        <span class="ml-2"> Creating Program is one of the main step to onboard the members - kindly check this <u> FAQ
+            </u> if u have any doubts </span>
+    </p> -->
+    <div class="flex flex-row relative align-items-left justify-content-center w-full pr-3 pt-0 mt-0 mr-2 ml-2">
+        <hr class="border-top-1 border-gray-300 border-dashed w-12 h-0 float-left" />
+        <span
+            class="absolute uppercase LDIGITAL-font-poppins-md font-medium text-xs bg-white p-2 pt-0 pb-0 letter-space-2">
+            Shop insights
+        </span>
+    </div>
+    <div class="flex w-12 h-full flex-row mt-3">
+        <div class="w-6">
+            <div class="w 12 flex flex-row justify-content-between" *ngIf="allProgramAarray.length > 0 ">
+                <LDIGITAL-header-text [data]="{
+    title: 'Programs List',
+    description: 'Below are the default templates to onboard'
+  }"></LDIGITAL-header-text>
+            </div>
+
+            <!-- <div class="flex w-12 flex-wrap pb-2" *ngIf="allProgramAarray.length > 0 && viewAlign === 'C'">
+                <LDIGITAL-card class=" w-12 w-2 mr-3" *ngFor="let _overview of allProgramAarray; let i = index"
+                    [cardOptions]="_overview" (selectCardEvent)="selectCard($event)"
+                    (click)="selectCardItems($event, _overview)">
+                </LDIGITAL-card>
+            </div> -->
+            <div class="flex justify-content-center flex-column h-full align-items-center"
+                *ngIf="allProgramAarray.length < 1">
+                <img src="assets/icons/no_program.svg" class="h-10rem" alt="">
+                <p>
+                    <span class="text-sm LDIGITAL-font-poppins-light text-gray-800">
+                        Please Search the Programs
+                    </span>
+                </p>
+            </div>
+        </div>
+        <div class="w-1 relative flex align-items-center justify-content-center">
+            <div class=" flex border-right-1 border-right-dashed h-full p-2">
+            </div>
+            <span
+                class="absolute rotate-90 w-auto  -mt-3 uppercase LDIGITAL-font-poppins-md font-medium text-xs bg-white letter-space-2 absolute_text">
+                Analytics
+            </span>
+        </div>
+    </div>
+
+</div>

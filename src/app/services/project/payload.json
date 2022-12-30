@@ -1,0 +1,121 @@
+{
+    "program_name": "CM_PROGRAM_LOB_SDTATE",
+    "program_description": "<HtmL></html>",
+    "metadata": {
+        "state": [
+            {
+                "title": "LA",
+                "code": "LA"
+            },
+            {
+                "title": "LA",
+                "code": "LA"
+            },
+            {
+                "title": "LA",
+                "code": "LA"
+            },
+            {
+                "title": "LA",
+                "code": "LA"
+            }
+        ],
+        "LOB": [
+            {
+                "title": "CSBD",
+                "code": "LA"
+            },
+            {
+                "title": "MEDIACID",
+                "code": "LA"
+            },
+            {
+                "title": "MEDICARE",
+                "code": "LA"
+            }
+        ]
+    },
+    "engagement_data": [
+        {
+            "title": "Self Achiever",
+            "description": "your text"
+        }
+    ],
+    "Likeihood_data": {
+        "include": [
+            {
+                "title": "LIPA",
+                "value": [
+                    0.1,
+                    0.5
+                ],
+                "condition": "AND"
+            },
+            {
+                "title": "LIRA",
+                "value": [
+                    0.1,
+                    0.5
+                ]
+            }
+        ],
+        "exclude": [
+            {
+                "title": "LIPA",
+                "value": [
+                    0.1,
+                    0.5
+                ]
+            },
+            {
+                "title": "LIRA",
+                "value": [
+                    0.1,
+                    0.5
+                ]
+            }
+        ]
+    },
+    "condition_profile": {
+        "include": [
+            {
+                "title": "Diabetes",
+                "value": [
+                    {
+                        "title": "acutiy_score",
+                        "value": [
+                            0.1,
+                            0.5
+                        ],
+                        "condition": "AND"
+                    }
+                ]
+            }
+        ],
+        "exclude": [
+            {
+                "title": "Asthma",
+                "value": [
+                    {
+                        "title": "acutiy_score",
+                        "value": [
+                            0.1,
+                            0.3
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+},
+{
+    "program_name": "Test new Program2",
+    "lob": [
+        "csbd"
+    ],
+    "states": [
+        "al"
+    ],
+    "start_date": "12/12/2012",
+    "end_date": "12/12/2022"
+}

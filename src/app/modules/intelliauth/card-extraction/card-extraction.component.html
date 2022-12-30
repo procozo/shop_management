@@ -1,0 +1,75 @@
+<p-progressBar *ngIf="isAPICall" mode="indeterminate" [style]="{ height: '3px' }"
+  class="p-0 m-0 fixed top-0 left-0 z-2 w-full">
+</p-progressBar>
+<p-toast position="top-right"></p-toast>
+<div class="flex h-full mt-nav-auto flex-column p-3 pt-0">
+  <LDigital-notification *ngIf="pageConfig?.isNotification" [notificationConfig]="pageConfig">
+  </LDigital-notification>
+
+  <LDIGITAL-header-text [data]="{
+      title: 'Clinical Cards',
+      description: 'The clinical schema management tool'
+    }"></LDIGITAL-header-text>
+  <LDIGITAL-search-data-module-feature *ngIf="true"></LDIGITAL-search-data-module-feature>
+  <div class="flex flex-row relative align-items-left justify-content-center w-full pr-3 pt-0 -mt-4 mr-2 ml-2">
+    <hr class="border-top-1 border-gray-300 border-dashed w-12 h-0 float-left" />
+    <span class="absolute uppercase LDIGITAL-font-poppins-md font-medium text-xs bg-white p-2 pt-0 pb-0 letter-space-2">
+      CARD insights
+    </span>
+  </div>
+
+
+  <div class="h-full w-12 flex flex-row align-items-start justify-content-between pt-4">
+    <div
+      class="w-5 flex h-full flex-column align-items-center justify-content-center border-1 border-dashed border-gray-300">
+      <!-- <p class="mb-4 text-sm LDIGITAL-font-poppins-md mt-5">Use Autocards </p> -->
+      <p
+        class="mb-0 w-10 p-2 ml-2 bg-yellow-100 border-round-md text-xs font-bold flex flex-column justify-content-start align-items-start">
+        <span class="pi pi-info-circle">
+          <span class="ml-2 -mt-2 text-xs pb-3 w-10">
+            UI - “https://www.anthem.com/dam/medpolicies/abcbs_va/active/gu....”
+          </span></span>
+
+        <span class="LDIGITAL-font-poppins-md"> Total Cards - 13 </span>
+        <span class="LDIGITAL-font-poppins-md"> policy code : CG - MEG - 37 </span>
+      </p>
+
+      <img src="assets/icons/autocard.svg" class="mt-5" alt="">
+      <div class="flex flex-row justify-content-end mt-2 mb-4">
+        <p-button label="Use Autocards" icon="pi pi" iconPos="left" (click)="navigateTo('/card/extraction')"
+          class="LDIGITAL-font-poppins-md mt-1"></p-button>
+      </div>
+    </div>
+
+    <div class="w-1 h-full relative flex align-items-center justify-content-center">
+      <div class=" flex border-right-1 border-right-dashed h-full p-2">
+
+
+      </div>
+      <span
+        class="absolute rotate-90 w-auto  -mt-3 uppercase LDIGITAL-font-poppins-md font-medium text-xs bg-white letter-space-2 absolute_text">
+        OR
+      </span>
+    </div>
+
+
+    <div
+      class="w-5 flex h-full flex-column align-items-center justify-content-center  border-1 border-dashed border-gray-300">
+      <p
+        class="mb-0 w-10 p-2 ml-2 bg-yellow-100 border-round-md text-xs font-bold flex flex-column justify-content-start align-items-start">
+        <span class="pi pi-info-circle">
+          <span class="ml-2 -mt-2 text-xs pb-3 w-10">
+            UI - “https://www.anthem.com/dam/medpolicies/abcbs_va/active/gu....”
+          </span></span>
+
+        <span class="LDIGITAL-font-poppins-md"> Manual </span>
+        <span class="LDIGITAL-font-poppins-md"> policy code : CG - MEG - 37 </span>
+      </p>
+      <img src="assets/icons/manual.svg" class="mt-5" alt="">
+      <div class="flex flex-row justify-content-end mt-2 mb-4">
+        <p-button label="Use Manual Extraction" icon="pi pi" iconPos="left" (click)="navigateTo('policy/cards')"
+          class="LDIGITAL-font-poppins-md mt-1"></p-button>
+      </div>
+    </div>
+  </div>
+</div>

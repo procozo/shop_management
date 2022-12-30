@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23">
+  <g id="right" transform="translate(-242 -148)">
+    <g id="Rectangle_18" data-name="Rectangle 18" transform="translate(242 148)" fill="none" stroke="#15d490" stroke-width="1">
+      <rect width="23" height="23" rx="11.5" stroke="none"/>
+      <rect x="0.5" y="0.5" width="22" height="22" rx="11" fill="none"/>
+    </g>
+    <g id="material-symbols:done-rounded" transform="translate(247.049 151.927)">
+      <path id="Vector" d="M2.953,6.269a.616.616,0,0,1-.21-.035.489.489,0,0,1-.182-.119L.148,3.7A.52.52,0,0,1,0,3.3a.566.566,0,0,1,.162-.4.532.532,0,0,1,.393-.154A.532.532,0,0,1,.947,2.9L2.953,4.909,7.707.154a.595.595,0,0,1,.8,0,.54.54,0,0,1,.154.4.541.541,0,0,1-.154.4L3.345,6.115a.489.489,0,0,1-.182.119.616.616,0,0,1-.21.035Z" transform="translate(2.405 3.59)" fill="#15d490"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,13 @@
+<div class="flex justify-content-start">
+  <p
+    [class]="data?.isActive === true ? 'LDIGITAL-font-poppins-md text-md pt-0 mt-0 opacity-30' : 'LDIGITAL-font-poppins-md text-md pt-0 mt-0 opacity-1'">
+    {{ data?.title }} <img src="assets/icons/info.svg" *ngIf="data?.info !== false" class="ml-2 cursor-pointer mt-2"
+      alt="" />
+    <p-badge *ngIf="data?.count" [value]="data?.count || ''" size="normal" severity="bg-primary"
+      styleClass="mr-2 font-normal">
+    </p-badge>
+    <br />
+    <span class="text-xs color-gray-400 LDIGITAL-font-poppins-light">
+      {{ data?.description }}</span>
+  </p>
+</div>

@@ -1,0 +1,31 @@
+export interface DashboardConfigData {
+    navBar: {
+        logo: string;
+        title: string;
+        description: string;
+        notificationIcon: string;
+        profileIcon: string;
+    };
+    welcomeBlock: {
+        title: string;
+        createProjectButton: {
+            title: string
+        }[]
+    };
+    overviewBlock: {
+        header: string;
+        icon: string;
+        title: string;
+        count: number
+    };
+    recentlyCreatedProjectsBlock: {
+        title: string;
+        count: number;
+        cardData: never[];
+    };
+    allProjectsBlock: {
+        title: string;
+        count: number;
+        cardData: never[]
+    };
+}

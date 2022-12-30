@@ -1,0 +1,28 @@
+<div class="flex flex-column border-10 border-gray-500 surface-900 black h-full border-round-md relative">
+    <p
+        class="mb-0 p-2  border-round-md text-md  font-bold flex flex-row justify-content-start align-items-center text-white">
+        <img [src]="configJobResult?.icon" alt="">
+        <span class="ml-2 h-full saving flex align-items-center">
+            <div class="mb-3">
+                <p *ngIf="configJobResult?.status === 0 ">Running</p> {{configJobResult?.title}}
+            </div>
+            <div class="flex -mt-1" *ngIf="configJobResult?.status === 0 ">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </span>
+
+    <div class="mb-0 p-2  border-round-md text-md  font-bold flex flex-column justify-content-start  text-white">
+        <p>Job : List - {{configJobResult?.jobID}}</p>
+        <p class="mb-0  border-round-md text-xs  font-bold flex flex-column  text-white"
+            *ngFor="let _result of configJobResult?.result"> <span>{{_result?.service}} :
+                {{_result?.status}}</span> <br> </p>
+    </div>
+
+    <a href="https://uploaddownload-twinbuilder.azurewebsites.net/twinBuilder/downloadFileFromBlob/AutomaticIntegration%2FLogs%2FDev%2F2022%2F09%2F20%2FATS_d19d5890-38ee-4e3c-9bc8-af891b117243.zip"
+        class="absolute top-2 right-0 mr-2 mt-2 no-underline" target="_blank">
+        <p-button icon="pi pi-download" label="download result"></p-button>
+    </a>
+
+</div>

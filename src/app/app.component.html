@@ -1,0 +1,15 @@
+<div class="relative">
+  <div class="flex  flex-column p-3 pt-0 relative h-auto w-10">
+    <div class="w-10" *ngIf="currentUrl !== '/home' && currentUrl !== '/'">
+      <LDIGITALAction-side-nav [headerOptions]="headerOptions" (emitNotificationEvent)="notificationSubscription()"
+        (backToCreateEvent)="backToCreateHandler($event)"></LDIGITALAction-side-nav>
+    </div>
+    <LDigital-notification *ngIf="pageConfig?.isNotification" [notificationConfig]="pageConfig">
+    </LDigital-notification>
+
+  </div>
+
+  <div class="w-11 margin-lect-nav  mr-0">
+    <router-outlet></router-outlet>
+  </div>
+</div>

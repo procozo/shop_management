@@ -1,0 +1,65 @@
+<div class="w-full h-full">
+  <div class="flex justify-content-end px-2 align-items-center">
+    <button pButton label="Recompile" class="LDIGITAL-font-poppins-md h-2rem p-button-sm mb-3"></button>
+  </div>
+  <div class="h-30rem overflow-y-scroll">
+    <LDIGITAL-card *ngFor="let _overview of resultConfigList; let i = index" [cardOptions]="_overview"
+      (selectCardEvent)="changeConfigurationHandler($event)"></LDIGITAL-card>
+  </div>
+
+  <!-- Sidebar starts -->
+  <div class="fadeinright border-round-lg p-component-overlay flex justify-content-end h-5 w-12 blur absolute z-1"
+    *ngIf="isAssignment">
+    <div class="flex bg-white w-6 cursor-pointer">
+      <div class="flex flex-column mb-3 w-12 p-5 mt-0">
+        <div class="flex justify-content-between flex-row mb-3">
+          <div class="flex justify-content-between flex-row align-items-center w-full">
+            <LDIGITAL-header-text [data]="{
+                title: 'Selected Models',
+                description:
+                  'You can start assigning the application level elements now',
+                count: '1'
+              }"></LDIGITAL-header-text>
+            <br />
+            <div class=""></div>
+          </div>
+        </div>
+
+        <div class="w-7">
+          <LDIGITAL-card [cardOptions]="{ title: result }"></LDIGITAL-card>
+        </div>
+
+        <div>
+          <div class="flex align-items-center">
+            <p class="LDIGITAL-font-poppins-md">Enter Alias Name</p>
+            <span class="text-red-500">*</span>
+          </div>
+          <div class="flex align-items-center">
+            <input type="text" pInputText class="border-round-3xl border-1 w-8 max-w-5 border-gray-300 pl-3" />
+            <img src="assets/icons/info.svg" />
+          </div>
+
+          <div class="">
+            <p class="LDIGITAL-font-poppins-md">
+              Application and OS Images (Platform)
+            </p>
+            <div class="h-20rem overflow-y-scroll">
+              <LDIGITAL-card *ngFor="let imageData of OsImageData; let i = index" [cardOptions]="imageData"
+                (selectCardEvent)="selectedOs($event)"></LDIGITAL-card>
+            </div>
+          </div>
+          <div class="fixed bottom-0 mb-6 flex justify-content-between w-6 ml-1">
+            <button pButton label="cancel" class="LDIGITAL-font-poppins-md mt-1 text-gray-900 bg-white" value="Disable"
+              (click)="sideBarClose()"></button>
+            <div class="flex-grow-1"></div>
+            <div class="mr-7">
+              <button pButton label="save" class="LDIGITAL-font-poppins-md mt-1 mx-5"></button>
+              <button pButton label="Recompile" class="LDIGITAL-font-poppins-md mt-1"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Sidebar ends -->
+</div>

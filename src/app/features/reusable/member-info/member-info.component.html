@@ -1,0 +1,16 @@
+<div
+    class="flex w-12 border-1 relative border-gray-300 w-full p-2 pl-3 mt-5 border-round-lg flex-row mb-3 justify-content-between">
+
+    <div class="flex flex-wrap flex-row w-10">
+        <span
+            class="absolute right-0 bg-green-500  text-white text-xs p-1 pl-3 pr-3 bottom-0 mb-3 mr-2 border-round-3xl">
+            Slef Achiever
+        </span>
+        <p class="text-sm LDIGITAL-font-poppins-md uppercase mr-3 w-3" *ngFor="let _details of memberDetailsArray">
+            {{_details.title}}
+            <br>
+            <span class="text-xs font-bold">{{_details.value}}</span>
+        </p>
+    </div>
+    <img src="assets/icons/user_progile.svg" alt="">
+</div>

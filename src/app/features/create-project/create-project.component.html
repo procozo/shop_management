@@ -1,0 +1,43 @@
+<div class="flex flex-row justify-content-center h-full align-items-center mt-2 relative"
+  [formGroup]="projectCreateForm">
+  <div class="field mr-3 w-12">
+    <label for="username2" class="block text-md font-medium LDIGITAL-font-poppins-md">{{ pageData.projectTitle
+      }}</label>
+    <div class="flex w-full flex-row justify-content-left align-items-center">
+      <span class="p-input-icon-right mr-3">
+        <i>
+          <img *ngIf="f['title'].touched" [src]="
+              uniqueProjectName || f['title'].invalid
+                ? 'assets/icons/wrong.svg'
+                : 'assets/icons/right.svg'
+            " alt="" /></i>
+
+        <input id="title" type="text" formControlName="title" aria-describedby="title-help"
+          placeholder="{{ pageData.projectTitlePlaceholder }}" (keyup)="checkProjectName($event)"
+          class="ng-invalid ng-dirty border-round-3xl border-1 w-12 max-w-full border-gray-300 pl-3" pInputText />
+      </span>
+      <img src="{{ pageData.infoIcon }}" pTooltip="{{ pageData.uniqueProjectToolTip }}" tooltipPosition="top" alt="" />
+    </div>
+    <small id="title-help" *ngIf="f['title'].touched && f['title'].invalid" class="p-error block text-xs">{{
+      pageData.invalidName }}</small>
+    <small id="title-help" *ngIf="uniqueProjectName" class="p-error block text-xs">{{ pageData.uniqueProjectName }}
+    </small>
+  </div>
+
+  <div class="field mr-3 w-12">
+    <label for="username2" class="block text-md font-medium LDIGITAL-font-poppins-md">{{ pageData.projectDescription
+      }}</label>
+    <div class="flex w-full flex-row justify-content-left align-items-center">
+      <span class="p-input-icon-right mr-3">
+        <input id="description" type="text" aria-describedby="description-help" formControlName="description"
+          placeholder="{{ pageData.projectDescriptionPlaceholder }}"
+          class="ng-invalid ng-dirty border-round-3xl border-1 w-12 max-w-full border-gray-300 pl-3" pInputText />
+      </span>
+      <img src="{{ pageData.infoIcon }}" alt="" pTooltip="{{ pageData.projectDescriptionToolTip }}"
+        tooltipPosition="top" class="cursor-pointer" />
+    </div>
+  </div>
+  <p-button label="{{ pageData.buttonLabel }}" (click)="submitForm()"
+    [disabled]="projectCreateForm?.valid && !uniqueProjectName ? false : true" class="LDIGITAL-font-poppins-md mt-2">
+  </p-button>
+</div>
