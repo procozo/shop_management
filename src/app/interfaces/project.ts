@@ -26,6 +26,7 @@ export interface Card {
   type?: string;
   isSingleCheckUI?: boolean;
   id?: string;
+  _id?: string;
   apiData?: AssignType;
   workflow?: {}[];
   elementList?: {};

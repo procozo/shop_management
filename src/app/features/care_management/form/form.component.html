@@ -34,8 +34,9 @@
                         <div class="flex w-full flex-row justify-content-left align-items-center">
                             <div
                                 class="flex w-full h-full flex-row justify-content-start align-items-center p-input-icon-right">
-                                <p-autoComplete [showClear]="true" [suggestions]="filteredList || []" field="title"
-                                    (onClear)="clearProgram(_form)" (onSelect)="changeDataInput(_form , $event, 'auto')"
+                                <p-autoComplete placeholder="Please enter shop name here" [showClear]="true"
+                                    [suggestions]="filteredList || []" field="title" (onClear)="clearProgram(_form)"
+                                    (onSelect)="changeDataInput(_form , $event, 'auto')"
                                     (completeMethod)="search(_form, $event)">
                                     <ng-template let-country pTemplate="item">
                                         <div class="country-item">

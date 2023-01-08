@@ -27,7 +27,9 @@ export class ProgramCreateComponent implements OnInit {
   agreementForm!: TextForm[];
   advancedAgreementForm!: TextForm[];
   shopNameArray: any = [];
-
+  agreementDetailsArray: any = [];
+  shopArray!: Card[];
+  mainStep = 2;
 
   /** concition for LIPA & LERA */
 
@@ -36,10 +38,12 @@ export class ProgramCreateComponent implements OnInit {
   basicPaloadDataArray!: any;
   tanentDetailsData!: { Shop_tenant_details: { tenant_name: unknown; tenant_kyc_details: { adhar_no: number; other: null; }; tenant_contact_details: { mobile: number; email: string; address: string; }; }; };
   payloadDataAgreement!: any;
-  payloadDataDeposit!: { deposit_details: { deposit_amount: unknown; deposit_received_date: unknown; deposit_credited_date: unknown; deposit_credited_bank: unknown; deposit_text: unknown; }; };
-  shopCurrentId: any;
+  payloadDataDeposit!: any;
+  shopCurrentId!: string;
   riskProfileArray!: Card[];
   dummyData: any;
+  currentShopname: any;
+  isAvailable: any;
   constructor(
     private programService: ProjectService,
     private store: Store<AppState>
@@ -60,7 +64,8 @@ export class ProgramCreateComponent implements OnInit {
     try {
 
       this.programService.getAllShops().then((res: any) => {
-        console.log(res)
+        this.shopArray = res as Card[];
+        console.log(this.shopArray)
         this.dummyData = res[20];
         console.log(this.dummyData)
         console.log(this.formControlObject);
@@ -102,14 +107,6 @@ export class ProgramCreateComponent implements OnInit {
           }
 
         ];
-        // (this.formControlObject.find((el) => (el as { key: string })?.key === 'title') as any).value = this.dummyData.title;
-        // (this.formControlObject.find((el) => (el as { key: string })?.key === 'shop_facing') as any).value = this.dummyData.basic_details?.shop_facing;
-        // (this.formControlObject.find((el) => (el as { key: string })?.key === 'floor_no') as any).value = this.dummyData?.basic_details?.floor_no[0];
-        // (this.formControlObject.find((el) => (el as { key: string })?.key === 'shop_no') as any).value = this.dummyData?.basic_details?.shop_no[0];
-        // (this.formControlObject.find((el) => (el as { key: string })?.key === 'status_of_shop') as any).value = this.dummyData?.status_of_shop;
-        // (this.formControlObject.find((el) => (el as { key: string })?.key === 'width') as any).value = this.dummyData?.basic_details?.size_of_shop?.width;
-        // (this.formControlObject.find((el) => (el as { key: string })?.key === 'height') as any).value = this.dummyData?.basic_details?.size_of_shop?.height;
-        // (this.formControlObject.find((el) => (el as { key: string })?.key === 'type_of_business') as any).value = this.dummyData?.basic_details?.type_of_business;
 
       })
       this.riskProfileArray = [
@@ -395,14 +392,15 @@ export class ProgramCreateComponent implements OnInit {
         {
           title: "Create Shop",
           required: true,
-          type: "text",
+          type: "button",
           isSearch: true,
           placeHolder: "Search",
           isClear: true,
           isMultiple: false,
           isText: false,
           autocomplete: false,
-          isButton: true
+          isButton: true,
+          key: 'create_shop',
 
         }
 
@@ -489,7 +487,8 @@ export class ProgramCreateComponent implements OnInit {
           isMultiple: false,
           isText: false,
           autocomplete: false,
-          isButton: true
+          isButton: true,
+          key: 'create_shop'
 
         }
 
@@ -602,53 +601,6 @@ export class ProgramCreateComponent implements OnInit {
           key: 'agreement_status',
         },
         {
-          title: "Save And Next ",
-          required: true,
-          type: "text",
-          isSearch: true,
-          placeHolder: "Search",
-          isClear: true,
-          isMultiple: false,
-          isText: false,
-          autocomplete: false,
-          isButton: true,
-
-        }
-
-      ];
-
-      this.advancedAgreementForm = [
-        {
-          title: "Enter Deposit Amount",
-          required: true,
-          type: "text",
-          isSearch: true,
-          placeHolder: "Search",
-          isClear: true,
-          isMultiple: false,
-          isText: true,
-          autocomplete: false,
-          dataList: [
-          ],
-
-          key: 'deposit_amount',
-        }, {
-          title: "Enter deposit received date ",
-          required: true,
-          type: "text",
-          isSearch: true,
-          placeHolder: "Enter",
-          isClear: true,
-          isMultiple: false,
-          isText: false,
-          autocomplete: false,
-          isDate: true,
-          dataList: [
-          ],
-
-          key: 'deposit_received_date',
-        },
-        {
           title: "Enter Advance Amount Deposited",
           required: true,
           type: "text",
@@ -661,7 +613,7 @@ export class ProgramCreateComponent implements OnInit {
           dataList: [
           ],
 
-          key: 'advance_amount_deposited',
+          key: 'deposit_amount_deposited',
         },
         {
           title: "Enter Deposit Amount return Date ",
@@ -677,7 +629,7 @@ export class ProgramCreateComponent implements OnInit {
           dataList: [
           ],
 
-          key: 'deposit_received_date',
+          key: 'deposit_amount_return_date',
         }, {
           title: "Enter Deposit Text",
           required: true,
@@ -753,7 +705,56 @@ export class ProgramCreateComponent implements OnInit {
           autocomplete: false,
           isButton: true
 
+        },
+
+        {
+          title: "Save And Next ",
+          required: true,
+          type: "text",
+          isSearch: true,
+          placeHolder: "Search",
+          isClear: true,
+          isMultiple: false,
+          isText: false,
+          autocomplete: false,
+          isButton: true,
+
         }
+
+      ];
+
+      this.advancedAgreementForm = [
+        // {
+        //   title: "Enter Deposit Amount",
+        //   required: true,
+        //   type: "text",
+        //   isSearch: true,
+        //   placeHolder: "Search",
+        //   isClear: true,
+        //   isMultiple: false,
+        //   isText: true,
+        //   autocomplete: false,
+        //   dataList: [
+        //   ],
+
+        //   key: 'deposit_amount',
+        // }, {
+        //   title: "Enter deposit received date ",
+        //   required: true,
+        //   type: "text",
+        //   isSearch: true,
+        //   placeHolder: "Enter",
+        //   isClear: true,
+        //   isMultiple: false,
+        //   isText: false,
+        //   autocomplete: false,
+        //   isDate: true,
+        //   dataList: [
+        //   ],
+
+        //   key: 'deposit_received_date',
+        // },
+
 
 
       ];
@@ -780,6 +781,8 @@ export class ProgramCreateComponent implements OnInit {
             "height": (data.find((el) => (el as { title: string })?.title === 'height') as { value: string | unknown })?.value,
             "scale": "sqft"
           },
+          "shop_facing": (data.find((el) => (el as { title: string })?.title === 'shop_facing') as { value: string | unknown })?.value,
+          // "floor_no": (data.find((el) => (el as { title: string })?.title === 'floor_no') as { value: string | unknown })?.value,
           "shop_no": (data.find((el) => (el as { title: string })?.title === 'shop_no') as { value: string | unknown })?.value,
           "type_of_business": (data.find((el) => (el as { title: string })?.title === 'type_of_business') as { value: string | unknown })?.value
         },
@@ -800,14 +803,17 @@ export class ProgramCreateComponent implements OnInit {
           alert(res.message)
           // this.shopCurrentId = res.result._id;
         })
+        Object.assign(this.riskProfileArray[0], { risk_type: 'good' })
+        // this.riskProfileArray[0].risk_type = 'good'
       } else {
         this.programService.createProject(this.basicPaloadDataArray).then((res: any) => {
           console.log(res)
           alert(res.result._id)
           this.shopCurrentId = res.result._id;
         })
-
+        this.riskProfileArray[0].risk_type = 'good'
       }
+
 
     } catch (error) {
       console.log(error)
@@ -875,6 +881,15 @@ export class ProgramCreateComponent implements OnInit {
             "agreement_effective_date": (data.find((el) => (el as { title: string })?.title === 'agreement_effective_date') as { value: string | unknown })?.value,
             "agreement_term_date": (data.find((el) => (el as { title: string })?.title === 'agreement_term_date') as { value: string | unknown })?.value,
             "contact_renewal_amount_percentage": (data.find((el) => (el as { title: string })?.title === 'contact_renewal_amount_percentage') as { value: string | unknown })?.value,
+            "rental_amount": (data.find((el) => (el as { title: string })?.title === 'rental_amount') as { value: string | unknown })?.value,
+            // "deposit_amount": (data.find((el) => (el as { title: string })?.title === 'deposit_amount') as { value: string | unknown })?.value,
+            // "deposit_received_date": (data.find((el) => (el as { title: string })?.title === 'deposit_received_date') as { value: string | unknown })?.value,
+            "deposit_credited_date": (data.find((el) => (el as { title: string })?.title === 'deposit_credited_date') as { value: string | unknown })?.value,
+            "deposit_credited_bank": (data.find((el) => (el as { title: string })?.title === 'deposit_credited_bank') as { value: string | unknown })?.value,
+            "deposit_text": (data.find((el) => (el as { title: string })?.title === 'deposit_text') as { value: string | unknown })?.value,
+            "deposit_amount_return_date": (data.find((el) => (el as { title: string })?.title === 'deposit_amount_return_date') as { value: string | unknown })?.value,
+            "deposit_amount_deposited": (data.find((el) => (el as { title: string })?.title === 'deposit_amount_deposited') as { value: string | unknown })?.value,
+
           }
         ],
 
@@ -910,6 +925,8 @@ export class ProgramCreateComponent implements OnInit {
           "deposit_credited_date": (data.find((el) => (el as { title: string })?.title === 'deposit_credited_date') as { value: string | unknown })?.value,
           "deposit_credited_bank": (data.find((el) => (el as { title: string })?.title === 'deposit_credited_bank') as { value: string | unknown })?.value,
           "deposit_text": (data.find((el) => (el as { title: string })?.title === 'deposit_text') as { value: string | unknown })?.value,
+          "deposit_amount_return_date": (data.find((el) => (el as { title: string })?.title === 'deposit_amount_return_date') as { value: string | unknown })?.value,
+          "deposit_amount_deposited": (data.find((el) => (el as { title: string })?.title === 'deposit_amount_deposited') as { value: string | unknown })?.value,
 
         }
 
@@ -956,10 +973,11 @@ export class ProgramCreateComponent implements OnInit {
   }
 
   searchShopDetails(data: any) {
-    console.log(data[0].value.data)
+    console.log(data[0])
     this.shopCurrentId = data[0].value.code
-
+    this.currentShopname = data[0].value?.title
     this.dummyData = data[0].value.data;
+    this.isAvailable = this.dummyData?.status_of_shop?.title
     console.log(this.dummyData)
     console.log(this.formControlObject);
 
@@ -1046,41 +1064,56 @@ export class ProgramCreateComponent implements OnInit {
     ];
 
 
-    (this.formControlObject.find((el) => (el as { key: string })?.key === 'title') as any).value = this.dummyData.title;
+
+    (this.formControlObject.find((el) => (el as { key: string })?.key === 'title') as any).value = this.dummyData?.title;
     (this.formControlObject.find((el) => (el as { key: string })?.key === 'shop_facing') as any).value = this.dummyData.basic_details?.shop_facing;
-    (this.formControlObject.find((el) => (el as { key: string })?.key === 'floor_no') as any).value = this.dummyData?.basic_details?.floor_no[0];
-    (this.formControlObject.find((el) => (el as { key: string })?.key === 'shop_no') as any).value = this.dummyData?.basic_details?.shop_no[0];
+    (this.formControlObject.find((el) => (el as { key: string })?.key === 'floor_no') as any).value = this.dummyData?.basic_details?.floor_no;
+    (this.formControlObject.find((el) => (el as { key: string })?.key === 'shop_no') as any).value = this.dummyData?.basic_details?.shop_no;
     (this.formControlObject.find((el) => (el as { key: string })?.key === 'status_of_shop') as any).value = this.dummyData?.status_of_shop;
     (this.formControlObject.find((el) => (el as { key: string })?.key === 'width') as any).value = this.dummyData?.basic_details?.size_of_shop?.width;
     (this.formControlObject.find((el) => (el as { key: string })?.key === 'height') as any).value = this.dummyData?.basic_details?.size_of_shop?.height;
     (this.formControlObject.find((el) => (el as { key: string })?.key === 'type_of_business') as any).value = this.dummyData?.basic_details?.type_of_business;
+    (this.formControlObject.find((el) => (el as { key: string })?.key === 'create_shop') as any).title = 'Update Shop';
 
-    (this.tanetFormControl.find((el) => (el as { key: string })?.key === 'tenant_name') as any).value = this.dummyData.Shop_tenant_details.tenant_name;
-    (this.tanetFormControl.find((el) => (el as { key: string })?.key === 'mobile') as any).value = this.dummyData.Shop_tenant_details.tenant_contact_details.mobile;
-    (this.tanetFormControl.find((el) => (el as { key: string })?.key === 'address') as any).value = this.dummyData.Shop_tenant_details.tenant_contact_details.address;
-    (this.tanetFormControl.find((el) => (el as { key: string })?.key === 'email') as any).value = this.dummyData.Shop_tenant_details.tenant_contact_details.email;
-    (this.tanetFormControl.find((el) => (el as { key: string })?.key === 'adhar_no') as any).value = this.dummyData.Shop_tenant_details.tenant_kyc_details.adhar_no;
 
-    this.dummyData.agrement_details.map((agreement: any) => {
+
+    (this.tanetFormControl.find((el) => (el as { key: string })?.key === 'tenant_name') as any).value = this.dummyData?.Shop_tenant_details?.tenant_name;
+    (this.tanetFormControl.find((el) => (el as { key: string })?.key === 'mobile') as any).value = this.dummyData?.Shop_tenant_details?.tenant_contact_details?.mobile;
+    (this.tanetFormControl.find((el) => (el as { key: string })?.key === 'address') as any).value = this.dummyData?.Shop_tenant_details?.tenant_contact_details?.address;
+    (this.tanetFormControl.find((el) => (el as { key: string })?.key === 'email') as any).value = this.dummyData?.Shop_tenant_details?.tenant_contact_details?.email;
+    (this.tanetFormControl.find((el) => (el as { key: string })?.key === 'adhar_no') as any).value = this.dummyData?.Shop_tenant_details?.tenant_kyc_details?.adhar_no;
+    (this.tanetFormControl.find((el) => (el as { key: string })?.key === 'create_shop') as any).title = 'Update Details';
+    console.log(this.dummyData)
+    this.dummyData?.agrement_details?.map((agreement: any) => {
+      console.log(agreement);
       (this.agreementForm.find((el) => (el as { key: string })?.key === 'agreement_amount') as any).value = agreement?.agreement_amount;
       (this.agreementForm.find((el) => (el as { key: string })?.key === 'agreement_effective_date') as any).value = new Date(agreement?.agreement_effective_date);
       (this.agreementForm.find((el) => (el as { key: string })?.key === 'agreement_term_date') as any).value = new Date(agreement?.agreement_term_date);
       (this.agreementForm.find((el) => (el as { key: string })?.key === 'agreement_status') as any).value = agreement?.agreement_status;
       (this.agreementForm.find((el) => (el as { key: string })?.key === 'contact_renewal_amount_percentage') as any).value = agreement?.contact_renewal_amount_percentage;
-      (this.advancedAgreementForm.find((el) => (el as { key: string })?.key === 'deposit_amount') as any).value = agreement.deposit_details.deposit_amount;
-      (this.advancedAgreementForm.find((el) => (el as { key: string })?.key === 'deposit_amount') as any).value = agreement.deposit_details.deposit_amount;
-      (this.advancedAgreementForm.find((el) => (el as { key: string })?.key === 'deposit_text') as any).value = agreement.deposit_details.deposit_text;
-      (this.advancedAgreementForm.find((el) => (el as { key: string })?.key === 'deposit_received_date') as any).value = new Date(agreement.deposit_details.deposit_received_date);
-      (this.advancedAgreementForm.find((el) => (el as { key: string })?.key === 'deposit_credited_date') as any).value = new Date(agreement.deposit_details.deposit_credited_date);
-      (this.advancedAgreementForm.find((el) => (el as { key: string })?.key === 'deposit_credited_bank') as any).value = agreement.deposit_details.deposit_credited_bank;
+      (this.agreementForm.find((el) => (el as { key: string })?.key === 'rental_amount') as any).value = agreement?.rental_amount;
+
+      // (this.advancedAgreementForm.find((el) => (el as { key: string })?.key === 'deposit_amount') as any).value = agreement?.deposit_details?.deposit_amount;
+      (this.agreementForm.find((el) => (el as { key: string })?.key === 'deposit_amount_deposited') as any).value = agreement?.deposit_amount_deposited;
+      (this.agreementForm.find((el) => (el as { key: string })?.key === 'deposit_amount_return_date') as any).value = agreement?.deposit_amount_return_date ? new Date(agreement?.deposit_amount_return_date) : new Date();
+      (this.agreementForm.find((el) => (el as { key: string })?.key === 'deposit_text') as any).value = agreement?.deposit_text;
+      (this.agreementForm.find((el) => (el as { key: string })?.key === 'deposit_received_date') as any).value = new Date(agreement?.deposit_received_date);
+      (this.agreementForm.find((el) => (el as { key: string })?.key === 'deposit_credited_date') as any).value = new Date(agreement?.deposit_credited_date);
+      (this.agreementForm.find((el) => (el as { key: string })?.key === 'deposit_credited_bank') as any).value = agreement?.deposit_credited_bank;
+      // this.agreementDetailsArray.push(this.agreementForm)
       // (this.agreementForm.find((el) => (el as { key: string })?.key === 'agreement_amount') as any).value = agreement?.agreement_amount;
     });
-
+    console.log(this.agreementDetailsArray)
 
   }
 
   getCarddetailsTriggerhandler(data: Card) {
     console.log(data)
     this.pageConfig.stepNumber = Number(data.id)
+  }
+
+  navigateToShop(data: Card) {
+    console.log((data))
+
   }
 }
